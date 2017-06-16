@@ -5,7 +5,7 @@ in ionic's _variables.scss file.
 
 For example, you might change some of the default colors:
 
-$light:                           #1168B1 !default;
+$light:                           #fff !default;
 $stable:                          #f8f8f8 !default;
 $positive:                        #387ef5 !default;
 $calm:                            #11c1f3 !default;
@@ -15,17 +15,36 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
-.button.test {
-  color: red !important; }
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  height: 75%; }
 
-.button.button-outline {
-  color: #1168B1 !important; }
+.tam {
+  height: 100px;
+  width: auto; }
 
-.button.button-block {
-  color: #004d99 !important; }
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
 
-.ion-side-menu {
-  color: #004d99 !important; }
+.col.borda {
+  border: 1px solid #66C6BA;
+  padding: 20px; }
+
+.col.bord {
+  border: 1px solid #66C6BA; }
+
+div.link {
+  position: relative;
+  top: 12px;
+  right: 5px; }
+
+a.text-right {
+  text-align: right; }
 
 /*!
   Ionicons, v2.0.1
