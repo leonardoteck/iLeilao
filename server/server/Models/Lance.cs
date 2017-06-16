@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server.Models
 {
@@ -9,5 +10,7 @@ namespace server.Models
         public DateTime Data { get; set; }
         public string UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
+        public int LeilaoId { get; set; }
+        public Leilao Leilao { get; set; }
     }
 }
