@@ -13,7 +13,11 @@ namespace server
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
-                .UseKestrel()
+                .UseKestrel(opts =>
+                {
+                    opts.UseHttps("cert.pfx", "s0000000000");
+                })
+                .UseUrls("https://*:5001")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
