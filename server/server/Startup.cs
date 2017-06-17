@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.Models;
@@ -10,6 +9,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
 namespace server
 {
@@ -34,6 +36,7 @@ namespace server
         {
             services.AddOptions();
             services.AddCors();
+            services.AddAuthorization();
             
             //Configuração da Entity Framework + PostgreSQL
             services.AddEntityFrameworkNpgsql()
@@ -52,7 +55,8 @@ namespace server
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireLowercase = false;
                 opts.Password.RequiredLength = 1;
-            });
+            })
+            .AddEntityFrameworkStores<LeilaoContext>();
 
             // Add framework services.
             services.AddMvc();
@@ -69,7 +73,7 @@ namespace server
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             //Permite que requisições sejam feitas de outras fontes
             app.UseCors(builder =>
@@ -106,7 +110,30 @@ namespace server
                 TokenValidationParameters = tokenValidationParameters
             });
 
+            
+            
             app.UseMvcWithDefaultRoute();
+            
+
+            if (env.IsDevelopment())
+            {
+                app.UseExceptionHandler(
+                 options => {
+                     options.Run(
+                     async context =>
+                     {
+                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                         context.Response.ContentType = "text/html";
+                         var ex = context.Features.Get<IExceptionHandlerFeature>();
+                         if (ex != null)
+                         {
+                             var err = $"<h1>Error: {ex.Error.Message}</h1>{ex.Error.StackTrace }";
+                             await context.Response.WriteAsync(err).ConfigureAwait(false);
+                         }
+                     });
+                 });
+            }
+
         }
     }
 }

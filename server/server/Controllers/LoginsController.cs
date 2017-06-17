@@ -15,7 +15,6 @@ namespace server.Controllers
 {
     [Produces("application/json")]
     [Route("api/Logins")]
-    [Authorize]
     public class LoginsController : Controller
     {
         private readonly JwtIssuerOptions jwtOptions;
@@ -40,7 +39,7 @@ namespace server.Controllers
         {
 
             //busca o usuário pelo email
-            Usuario usuario = await userManager.FindByEmailAsync(login.Login);
+            Usuario usuario = await userManager.FindByEmailAsync(login.Email);
             if (usuario != null)
             {
                 //verifica se a senha passada é a mesma do BD

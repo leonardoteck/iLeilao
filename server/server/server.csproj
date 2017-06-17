@@ -6,7 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Compile Remove="Cert\**" />
+    <Content Remove="Cert\**" />
+    <EmbeddedResource Remove="Cert\**" />
+    <None Remove="Cert\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="cert.pfx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>

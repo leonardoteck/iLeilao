@@ -23,7 +23,7 @@ namespace server.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Ignore<LoginModel>();
-            builder.Ignore<JwtIssuerOptions>();
+            //builder.Ignore<JwtIssuerOptions>();
 
             builder.Entity<Lance>()
                  .HasOne(lance => lance.Leilao)
