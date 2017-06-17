@@ -7,13 +7,17 @@ using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Text;
 
 namespace server
 {
     public class Startup
     {
         IConfigurationRoot Configuration;
+        private const string SecretKey = "F9bNO053oHGlT7ChEmBGRfohNHqqH2xzhtD/59C8t08Kq0iQu5E1K8PTR00JMq28g9Imbmo47U";
+        private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
 
         public Startup(IHostingEnvironment env)
         {
@@ -28,6 +32,9 @@ namespace server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            services.AddCors();
+            
             //Configuração da Entity Framework + PostgreSQL
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<LeilaoContext>(
@@ -46,9 +53,20 @@ namespace server
                 opts.Password.RequireLowercase = false;
                 opts.Password.RequiredLength = 1;
             });
+
             // Add framework services.
             services.AddMvc();
+
+            var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
+
+            services.Configure<JwtIssuerOptions>(options =>
+            {
+                options.Issuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
+                options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
+                options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+            });
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -60,6 +78,33 @@ namespace server
                     .AllowAnyOrigin()
                     .AllowCredentials()
             );
+
+            //Configuração da autenticação via Token
+            var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
+
+                ValidateAudience = true,
+                ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
+
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = _signingKey,
+
+                RequireExpirationTime = true,
+                ValidateLifetime = true,
+
+                ClockSkew = TimeSpan.Zero
+            };
+
+            //fala que a autenticação será feita via JWT
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = tokenValidationParameters
+            });
 
             app.UseMvcWithDefaultRoute();
         }

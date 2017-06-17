@@ -37,5 +37,10 @@ namespace server.Data
 
             base.OnModelCreating(builder);
         }
+
+        //O usuário não precisa estar nessa lista, pois ele é declarado
+        //na hora que a herança é feita
+
+        public DbSet<server.Models.Usuario> Usuario { get; set; }
     }
 }
