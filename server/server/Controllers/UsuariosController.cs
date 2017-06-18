@@ -1,14 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using server.Data;
+using server.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using server.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authorization;
-using server.Data;
 
 namespace server.Controllers
 {
@@ -210,7 +208,7 @@ namespace server.Controllers
             }
             catch (Exception e)
             {
-                throw;
+                throw e;
             }
 
         }
