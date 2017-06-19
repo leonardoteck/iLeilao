@@ -3,19 +3,25 @@
 
     angular
         .module('starter.services')
-        .value('auth', { done: false })
+        .value('auth', {
+            done: false,
+            data: null,
+            id: null,
+            token: null
+        })
         .service('LoginService', LoginService);
 
     LoginService.$inject = ['api', '$http', 'auth', '$ionicPopup'];
     function LoginService(api, $http, auth, $ionicPopup) {
         this.doLogin = doLogin;
+        this.recover = recover;
         
         ////////////////
 
         function doLogin(user, pass, cb) {
             if (!api.on()) {
                 auth.done = true;
-                cb();
+                cb(true);
                 return;
             }
             $http({
@@ -25,7 +31,7 @@
             }).success(function (data) {
                 auth.data = data;
                 auth.done = true;
-                cb();
+                cb(true);
             }).error(function (data) {
                 auth.done = false;
                 console.log(data);
@@ -33,7 +39,12 @@
                     title: 'Ops!',
                     template: data[0].errorMessage
                 });
+                cb(false);
             });
+        }
+
+        function recover(email) {
+            
         }
     }
 })();

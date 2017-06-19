@@ -10,7 +10,7 @@
         this.on = on;
         this.url = url;
 
-        var onState = true;
+        var onState = false;
         var strUrl = 'https://localhost:5001/api/';
         
         ////////////////
