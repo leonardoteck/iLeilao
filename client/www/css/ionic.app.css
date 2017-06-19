@@ -26,6 +26,10 @@ $dark:                            #444 !default;
   height: 70px;
   width: auto; }
 
+.tama {
+  height: 100px;
+  width: auto; }
+
 .centro {
   display: block;
   margin-left: auto;
