@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.Models;
+using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,38 +10,33 @@ namespace server.Controllers
 {
     [Produces("application/json")]
     [Route("api/Produtos")]
-    [Authorize]
+    //[Authorize]
     public class ProdutosController : Controller
     {
-        private readonly LeilaoContext _context;
+        private readonly LeilaoContext ctx;
 
         public ProdutosController(LeilaoContext context)
         {
-            _context = context;
+            ctx = context;
         }
 
         // GET: api/Produtos
         [HttpGet]
-        public IActionResult GetAll(string loteID)
+        public IEnumerable GetAll()
         {
-            var produtos = _context.Produto.Where(l => l.Id.Equals(loteID));
-
-            if(produtos.Any())
-            {
-                return Ok(produtos);
-            }
-            else
-            {
-                ModelState.AddModelError("Lote", "Produtos em lote não encontrados.");
-                return NotFound(ModelState.Values.SelectMany(p => p.Errors));
-            }
+            return ctx.Produto.ToList();
         }
 
         // GET: api/Produtos/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByID([FromRoute] int id)
         {
-            var produto = await _context.Produto.FirstOrDefaultAsync(p => p.Id.Equals(id));
+            // ERRO: Não retorna resposta com eager loading. Sem eager loading,
+            // retorna corretamente
+
+            var produto = await ctx.Produto
+                .Include(p => p.Lote)
+                .FirstOrDefaultAsync(p => p.Id.Equals(id));
 
             if(produto != null)
             {
@@ -58,21 +53,14 @@ namespace server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Produto produto)
         {
-            var loteExists = await _context.Lote.AnyAsync(l => l.Id.Equals(produto.LoteId));
+            var loteExists = await ctx.Lote.AnyAsync(l => l.Id.Equals(produto.LoteId));
 
             if(loteExists)
             {
                 // Lote encontrado, cria produto
-                var novoProduto = new Produto
-                {
-                    Nome = produto.Nome,
-                    Descricao = produto.Descricao,
-                    Quantidade = produto.Quantidade,
-                    LoteId = produto.LoteId
-                };
-                await _context.Produto.AddAsync(novoProduto);
-                await _context.SaveChangesAsync();
-                return CreatedAtAction("Create", novoProduto);
+                ctx.Produto.Add(produto);
+                await ctx.SaveChangesAsync();
+                return CreatedAtAction("Create", produto);
             }
             else
             {
@@ -86,7 +74,7 @@ namespace server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit([FromRoute] int id, [FromBody] Produto novoProduto)
         {
-            var produto = await _context.Produto.FirstOrDefaultAsync(p => p.Id.Equals(id));
+            var produto = await ctx.Produto.FirstOrDefaultAsync(p => p.Id.Equals(id));
 
             if(novoProduto != null)
             {
@@ -97,8 +85,8 @@ namespace server.Controllers
                 produto.LoteId = novoProduto.LoteId;
 
                 // Salva alterações no banco
-                _context.Produto.Update(produto);
-                await _context.SaveChangesAsync();
+                ctx.Produto.Update(produto);
+                await ctx.SaveChangesAsync();
                 return Ok(produto);
             }
             else
@@ -113,13 +101,13 @@ namespace server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var produto = await _context.Produto.FirstOrDefaultAsync(p => p.Id.Equals(id));
+            var produto = await ctx.Produto.FirstOrDefaultAsync(p => p.Id.Equals(id));
 
             if(produto != null)
             {
                 // Produto encontrado, proceder com exclusão
-                _context.Produto.Remove(produto);
-                await _context.SaveChangesAsync();
+                ctx.Produto.Remove(produto);
+                await ctx.SaveChangesAsync();
                 return Ok();
             }
             else
@@ -133,7 +121,7 @@ namespace server.Controllers
         // Utilitario
         private bool Exists(int id)
         {
-            return _context.Produto.Any(e => e.Id == id);
+            return ctx.Produto.Any(e => e.Id == id);
         }
     }
 }
