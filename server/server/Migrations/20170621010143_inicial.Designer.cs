@@ -9,8 +9,8 @@ using server.Models;
 namespace server.Migrations
 {
     [DbContext(typeof(LeilaoContext))]
-    [Migration("20170618234344_Inicial")]
-    partial class Inicial
+    [Migration("20170621010143_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -197,6 +197,9 @@ namespace server.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Descricao");
+
+                    b.Property<string>("Imagem")
+                        .HasColumnType("varchar");
 
                     b.Property<int>("LoteId");
 

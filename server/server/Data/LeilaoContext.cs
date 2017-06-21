@@ -16,9 +16,8 @@ namespace server.Data
         public DbSet<Lote> Lote { get; set; }
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Solicitacao> Solicitacao { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
 
-        //O usuário não precisa estar nessa lista, pois ele é declarado
-        //na hora que a herança é feita
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -36,11 +35,6 @@ namespace server.Data
                 .HasForeignKey(leilao => leilao.MaiorLanceId);
 
             base.OnModelCreating(builder);
-        }
-
-        //O usuário não precisa estar nessa lista, pois ele é declarado
-        //na hora que a herança é feita
-
-        public DbSet<server.Models.Usuario> Usuario { get; set; }
+        }       
     }
 }

@@ -197,6 +197,9 @@ namespace server.Migrations
 
                     b.Property<string>("Descricao");
 
+                    b.Property<string>("Imagem")
+                        .HasColumnType("varchar");
+
                     b.Property<int>("LoteId");
 
                     b.Property<string>("Nome");

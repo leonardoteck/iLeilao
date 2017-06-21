@@ -13,11 +13,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\LotesController.cs" />
+    <Compile Remove="Controllers\ProdutosController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="cert.pfx" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
