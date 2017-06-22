@@ -69,6 +69,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         })
 
+        .state('app.visualizar', {
+            url: '/visualizar',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/visualizar.html'
+                }
+            }
+        })
+
     .state('login', {
         url: '/login',
        // views: {
