@@ -50,6 +50,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
     })
 
+     .state('app.solicitacoes_leilo', {
+        url: '/solicitacoes_leilo',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/solicitacoes_leilo.html'
+            }
+        }
+    })
+
     .state('app.acompanha', {
             url: '/acompanha',
             views: {

@@ -23,10 +23,8 @@ $dark:                            #444 !default;
   height: auto; }
 
 .tam {
-  height: auto;
-  width: auto;
-  max-height: 100%;
-  max-width: 100%; }
+  height: 70px;
+  width: auto; }
 
 .custom {
   background-color: #30e3ca !important;
