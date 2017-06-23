@@ -23,8 +23,10 @@ $dark:                            #444 !default;
   height: auto; }
 
 .tam {
-  height: 70px;
-  width: auto; }
+  height: auto;
+  width: auto;
+  max-height: 100%;
+  max-width: 100%; }
 
 .tama {
   height: 100px;
