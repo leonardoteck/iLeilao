@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace server.Models
 {
     public class Produto
@@ -7,6 +9,8 @@ namespace server.Models
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public int Quantidade { get; set; }
+        [Column(TypeName = "varchar")]
+        public string Imagem { get; set; }
         public int LoteId { get; set; }
         public virtual Lote Lote { get; set; }
     }

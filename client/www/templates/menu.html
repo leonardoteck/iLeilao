@@ -1,13 +1,13 @@
 <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content>
-    <ion-nav-bar class="bar-stable">
+    <ion-nav-bar class="custom">
       <ion-nav-back-button>
       </ion-nav-back-button>
 
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         <button class="button button-icon button-clear icon ion-help" style="position:absolute; right: 10px; font-size:17px;"></button>
-        <button class="button button-icon button-clear icon ion-search" style="position:absolute; right: 50px; font-size:17px;"></button>
+        <button class="button button-icon button-clear icon ion-android-search" style="position:absolute; right: 50px; font-size:17px;"></button>
         </button>
       </ion-nav-buttons>
     </ion-nav-bar>
@@ -15,40 +15,43 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
+    <ion-header-bar class="bar custom">
       <h1 class="title">Menu</h1>
     </ion-header-bar>
-    <ion-content>
-      <ion-list>
-        <ion-item menu-close href="#/app/login">
+    <ion-content class="gohorse">
+      <ion-list> 
+        <ion-item menu-close href="#/app/login" class="item">
           Login
         </ion-item>
-        <ion-item menu-close href="#/app/principal">
+        <ion-item menu-close href="#/app/principal" class="item">
           Tela Inicial
         </ion-item>
-        <ion-item menu-close href="#/app/andamento">
+        <ion-item menu-close href="#/app/andamento" class="item">
           Leilões em andamento
         </ion-item>
-        <ion-item menu-close href="#/app/acompanha">
+        <ion-item menu-close href="#/app/acompanha" class="item">
           Leilões que acompanho(participante)
         </ion-item>
-         <ion-item menu-close href="#/app/acompanha">
+         <ion-item menu-close href="#/app/acompanha" class="item">
           Leilões encerrados(leiloeiro)
         </ion-item>
-        <ion-item menu-close href="#/app/leiloei">
+        <ion-item menu-close href="#/app/leiloei" class="item"> 
           Produtos que leiloei(participante)
         </ion-item>
-        <ion-item menu-close href="#/app/solicitacoes">
+        <ion-item menu-close href="#/app/solicitacoes" class="item">
           Solicitações(participante)
         </ion-item>
-        <ion-item menu-close href="#/app/solicitacoes">
+        <ion-item menu-close href="#/app/solicitacoes" class="item">
           Solicitações de leilão(leiloeiro)
         </ion-item>
-        <ion-item menu-close href="#/app/solicitacoes_part">
+        <ion-item menu-close href="#/app/solicitacoes_part" class="item">
           Leiloar um produto(participante)
         </ion-item>
-        <ion-item menu-close href="#/app/search">
+        <ion-item menu-close href="#/app/search" class="item">
           Sair
+        </ion-item>
+        <ion-item menu-close href="#/app/visualizar" class="item">
+          Visualizar
         </ion-item>
       </ion-list>
     </ion-content>

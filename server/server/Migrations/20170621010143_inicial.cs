@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace server.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -177,6 +177,7 @@ namespace server.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Descricao = table.Column<string>(nullable: true),
+                    Imagem = table.Column<string>(type: "varchar", nullable: true),
                     LoteId = table.Column<int>(nullable: false),
                     Nome = table.Column<string>(nullable: true),
                     Quantidade = table.Column<int>(nullable: false)
