@@ -9,9 +9,10 @@ using server.Models;
 namespace server.Migrations
 {
     [DbContext(typeof(LeilaoContext))]
-    partial class LeilaoContextModelSnapshot : ModelSnapshot
+    [Migration("20170622223535_Nome Leilao e alterações em solicitação")]
+    partial class Nomeleilaoealteracoessolicitacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -229,9 +230,6 @@ namespace server.Migrations
                     b.Property<int>("LoteId");
 
                     b.Property<int>("Status");
-
-                    b.Property<TimeSpan>("TempoLimiteLance")
-                        .HasColumnType("interval");
 
                     b.Property<string>("UsuarioId");
 

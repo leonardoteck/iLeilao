@@ -9,9 +9,10 @@ using server.Models;
 namespace server.Migrations
 {
     [DbContext(typeof(LeilaoContext))]
-    partial class LeilaoContextModelSnapshot : ModelSnapshot
+    [Migration("20170622151708_usuarioSolicitacao")]
+    partial class usuarioSolicitacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -159,9 +160,7 @@ namespace server.Migrations
 
                     b.Property<int>("LoteId");
 
-                    b.Property<int?>("MaiorLanceId");
-
-                    b.Property<string>("Nome");
+                    b.Property<int>("MaiorLanceId");
 
                     b.Property<int>("Status");
 
@@ -220,18 +219,13 @@ namespace server.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("DataFinal");
-
-                    b.Property<DateTime>("DataInicial");
+                    b.Property<DateTime>("Data");
 
                     b.Property<decimal>("IncrementoMinimo");
 
                     b.Property<int>("LoteId");
 
                     b.Property<int>("Status");
-
-                    b.Property<TimeSpan>("TempoLimiteLance")
-                        .HasColumnType("interval");
 
                     b.Property<string>("UsuarioId");
 
@@ -356,7 +350,8 @@ namespace server.Migrations
 
                     b.HasOne("server.Models.Lance", "MaiorLance")
                         .WithMany()
-                        .HasForeignKey("MaiorLanceId");
+                        .HasForeignKey("MaiorLanceId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("server.Models.Lote", b =>

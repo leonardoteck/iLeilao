@@ -13,18 +13,18 @@ namespace server.Controllers
     //[Authorize]
     public class LotesController : Controller
     {
-        private readonly LeilaoContext ctx;
+        private readonly LeilaoContext context;
 
-        public LotesController(LeilaoContext context)
+        public LotesController(LeilaoContext ctx)
         {
-            ctx = context;
+            context = ctx;
         }
 
         // GET: api/Lotes
         [HttpGet]
         public IEnumerable<Lote> GetAll()
         {
-            return ctx.Lote.ToList();
+            return context.Lote.ToList();
         }
 
         // GET: api/Lotes/UsuarioId
@@ -35,7 +35,7 @@ namespace server.Controllers
             // ERRO: Retorna uma lista vazia.
             // Não sei se esse método vai ser útil ou
             // pertence a essa classe.
-            var vendedorLotes = ctx.Lote
+            var vendedorLotes = context.Lote
                 .Include(l => l.Vendedor)
                 .Include(l => l.Produtos)
                 .Where(l => l.VendedorId.Equals(vendedorID));
@@ -50,7 +50,7 @@ namespace server.Controllers
             // não retorna resposta.
             // Entretanto, retorna informações do vendedor corretamente
             // caso não tenha produtos cadastrados.
-            var lote = await ctx.Lote
+            var lote = await context.Lote
                 .Include(l => l.Vendedor)
                 .Include(l => l.Produtos)
                 .FirstOrDefaultAsync(l => l.Id.Equals(id));
@@ -70,12 +70,12 @@ namespace server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Lote lote)
         {
-            var usuarioExists = ctx.Users.Any(u => u.Id.Equals(lote.VendedorId));
+            var usuarioExists = context.Users.Any(u => u.Id.Equals(lote.VendedorId));
 
             if(usuarioExists)
             {
-                ctx.Lote.Add(lote);
-                await ctx.SaveChangesAsync();
+                context.Lote.Add(lote);
+                await context.SaveChangesAsync();
                 return CreatedAtAction("Create", lote);
             }
             else
@@ -89,7 +89,7 @@ namespace server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit([FromRoute] int id, [FromBody] Lote novoLote)
         {
-            var lote = await ctx.Lote.FirstOrDefaultAsync(l => l.Id.Equals(novoLote.Id));
+            var lote = await context.Lote.FirstOrDefaultAsync(l => l.Id.Equals(novoLote.Id));
 
             if(lote != null)
             {
@@ -98,8 +98,8 @@ namespace server.Controllers
                 lote.Vendedor = novoLote.Vendedor;
 
                 // Salva alterações no banco
-                ctx.Lote.Update(lote);
-                await ctx.SaveChangesAsync();
+                context.Lote.Update(lote);
+                await context.SaveChangesAsync();
                 return Ok(lote);
             }
             else
@@ -114,13 +114,13 @@ namespace server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var lote = await ctx.Lote.FirstOrDefaultAsync(l => l.Id.Equals(id));
+            var lote = await context.Lote.FirstOrDefaultAsync(l => l.Id.Equals(id));
 
             if(lote != null)
             {
                 // Lote encontrado, proceder com exclusão
-                ctx.Lote.Remove(lote);
-                await ctx.SaveChangesAsync();
+                context.Lote.Remove(lote);
+                await context.SaveChangesAsync();
                 return Ok();
             }
             else
@@ -134,7 +134,7 @@ namespace server.Controllers
         // Utilitario
         private bool Exists(int id)
         {
-            return ctx.Lote.Any(e => e.Id == id);
+            return context.Lote.Any(e => e.Id == id);
         }
     }
 }

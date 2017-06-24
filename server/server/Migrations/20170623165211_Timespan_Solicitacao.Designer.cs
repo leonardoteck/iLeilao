@@ -9,9 +9,10 @@ using server.Models;
 namespace server.Migrations
 {
     [DbContext(typeof(LeilaoContext))]
-    partial class LeilaoContextModelSnapshot : ModelSnapshot
+    [Migration("20170623165211_Timespan_Solicitacao")]
+    partial class Timespan_Solicitacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)

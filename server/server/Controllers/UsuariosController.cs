@@ -41,9 +41,9 @@ namespace server.Controllers
         // GET: api/Usuarios
         [AllowAnonymous]
         [HttpGet]
-        public IEnumerable<Usuario> GetAll()
+        public IActionResult GetAll()
         {
-            return context.Usuario;
+            return Ok(context.Usuario);
         }
 
         // GET: api/Usuarios/5

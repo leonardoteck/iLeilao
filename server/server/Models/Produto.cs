@@ -1,4 +1,5 @@
 ﻿
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server.Models
@@ -12,6 +13,7 @@ namespace server.Models
         [Column(TypeName = "varchar")]
         public string Imagem { get; set; }
         public int LoteId { get; set; }
+        [JsonIgnore]
         public virtual Lote Lote { get; set; }
     }
 }
