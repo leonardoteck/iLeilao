@@ -5,8 +5,8 @@
         .module('starter.controllers')
         .controller('loginController', loginController);
 
-    loginController.$inject = ['LoginService', '$state', 'api', '$ionicPopup', '$scope'];
-    function loginController(LoginService, $state, api, $ionicPopup, $scope) {
+    loginController.$inject = ['LoginService', '$state', 'api', '$ionicPopup', '$scope', '$rootScope'];
+    function loginController(LoginService, $state, api, $ionicPopup, $scope, $rootScope) {
         var vm = this;
 
         vm.Dados = {};
@@ -14,6 +14,7 @@
         vm.fazerLogin = fazerLogin;
         vm.recuperarConta = recuperarConta;
         vm.apiChange = apiChange;
+        vm.tipoChange = tipoChange;
 
         activate();
 
@@ -59,6 +60,10 @@
             if (!vm.apiOn)
                 vm.Dados = { user: 'asdf@asdf.com', pass: 'asdf' };
             api.on(vm.apiOn);
+        }
+
+        function tipoChange() {
+            $rootScope.participante = vm.part;
         }
     }
 })();

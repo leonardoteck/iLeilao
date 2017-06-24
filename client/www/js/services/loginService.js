@@ -11,8 +11,8 @@
         })
         .service('LoginService', LoginService);
 
-    LoginService.$inject = ['api', '$http', 'auth', '$ionicPopup'];
-    function LoginService(api, $http, auth, $ionicPopup) {
+    LoginService.$inject = ['api', '$http', 'auth', '$ionicPopup', '$rootScope'];
+    function LoginService(api, $http, auth, $ionicPopup, $rootScope) {
         this.doLogin = doLogin;
         this.recover = recover;
         
