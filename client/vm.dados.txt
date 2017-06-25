@@ -5,11 +5,7 @@ vm.dados.tempoLimiteDias : number
 vm.dados.tempoLimiteHoras : number
 vm.dados.tempoLimiteMinutos : number
 vm.dados.tempoLimiteSegundos : number
-<<<<<<< HEAD
-vm.dados.diasDucarao: number
-=======
 vm.dados.diasDuracao : number
->>>>>>> Atualizado diretivas ng-repeat
 vm.dados.incrementoMinimo : number
 vm.dados.lote : object
 vm.dados.lote.valorMinimo : number
