@@ -5,7 +5,7 @@
        <br>
        <form name="solicitacao">
            <label class="item item-input">
-               <input type="text" placeholder="Título do leilão">
+               <input type="text" placeholder="Título do leilão" ng-model="vm.dados.nome">
            </label>
            
            <div class="row">
@@ -16,21 +16,21 @@
                     <div class="row">
                         <div class="col">  
                             <label class="item item-input">
-                                <input type="text" placeholder="Lance inicial">
+                                <input type="text" placeholder="Lance inicial" ng-model="vm.dados.lote.valorMinimo">
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">  
                             <label class="item item-input">
-                                <input type="text" placeholder="Incremento">
+                                <input type="text" placeholder="Incremento" ng-model="vm.dados.incrementoMinimo">
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">  
                             <label class="item item-input">
-                                <input type="text" placeholder="Tempo de lance">
+                                <input type="datetime" placeholder="Tempo de lance" ng-model="vm.dados.diasDuracao">
                             </label>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
             </div>
 
             <h4>Produtos:</h4>
-            <div class="row">
+            <div class="row" ng-repeat="item in vm.dados.produtos">
                 <div class="col bord col-center col-25" style="height: 100px; display: flex; align-items: center; justify-content: center;">
                     <img class="tam centro" src="img/iphone.png">
                 </div>
@@ -46,19 +46,19 @@
                     <div class="row">
                         <div class="col">  
                             <label class="item item-input">
-                                <input type="text" placeholder="Título">
+                                <input type="text" placeholder="Título do produto" ng-model="item.nome">
                             </label>
                         </div>
                         <div class="col">  
                             <label class="item item-input">
-                                <input type="text" placeholder="Quant.">
+                                <input type="text" placeholder="Quant." ng-model="item.quantidade">
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">  
                             <label class="item item-input">
-                                <input type="text" placeholder="Descrição do produto">
+                                <input type="text" placeholder="Descrição do produto" ng-model="item.descricao">
                             </label>
                         </div>
                     </div>
