@@ -15,6 +15,18 @@ vm.dados.lote.produtos.descricao : string
 vm.dados.lote.produtos.quantidade : number
 vm.dados.lote.produtos.imagem : imagem
 
-vm.addProduto() : para adicionar um produto na lista de produtos
-vm.removeProduto(index) : para remover um produto da lista
-vm.salvarDados() : para criar ou alterar uma solicitação
+
+Listas de Solicitações
+==============
+vm.dados : array
+vm.dados.nome : string
+vm.dados.imagem : imagem
+vm.dados.lote.valorMinimo : number
+
+Lista de Leilões
+==============
+vm.dados : array
+vm.dados.nome : string
+vm.dados.lote.imagem : imagem
+vm.dados.lote.valorMinimo : number
+vm.dados.lance.valor : number // maior lance
