@@ -11391,10 +11391,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mslda\\Downloads\\server\\server\\server.csproj",
+      "projectUniqueName": "D:\\Projetos Git\\iLeilao\\server\\server\\server.csproj",
       "projectName": "server",
-      "projectPath": "C:\\Users\\mslda\\Downloads\\server\\server\\server.csproj",
-      "outputPath": "C:\\Users\\mslda\\Downloads\\server\\server\\obj\\",
+      "projectPath": "D:\\Projetos Git\\iLeilao\\server\\server\\server.csproj",
+      "outputPath": "D:\\Projetos Git\\iLeilao\\server\\server\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"

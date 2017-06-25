@@ -23,6 +23,7 @@ namespace server.Data
         {
             builder.Ignore<LoginModel>();
             builder.Ignore<LeilaoLista>();
+            
 
             builder.Entity<Lance>()
                  .HasOne(lance => lance.Leilao)

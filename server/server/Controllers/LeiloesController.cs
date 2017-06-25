@@ -80,7 +80,7 @@ namespace server.Controllers
                 var leiloes = context.Leilao
                     .Include(l => l.MaiorLance)
                     .Include(l => l.Lote)
-                    .Where(l => l.UsuarioId.Equals(usuarioId));
+                    .Where(l => l.UsuarioId.Equals(usuarioId) && l.Status.Equals(StatusLeilao.EmAndamento));
 
                 var leilaoLista = EncurtarLeilao(leiloes);
 
@@ -99,11 +99,10 @@ namespace server.Controllers
         {
             try
             {
-                //NÃO FUNCIONA ESSA MERDA***********************************************************
                 var leiloes = await context.Lance
                     .Select(l => l.Leilao)
                     .Distinct()
-                    .Where(l => l.UsuarioId.Equals(usuarioId))
+                    .Where(l => l.UsuarioId.Equals(usuarioId) && l.Status.Equals(StatusLeilao.EmAndamento))
                     .ToListAsync();
 
 
@@ -180,6 +179,8 @@ namespace server.Controllers
                         .ThenInclude(m => m.Usuario)
                     .Include(l => l.Lote)
                         .ThenInclude(l => l.Produtos)
+                    .Include(l => l.Lote)
+                        .ThenInclude(l => l.Vendedor)
                     .Include(l => l.Lances)
                         .ThenInclude(l => l.Usuario)
                     .FirstOrDefaultAsync(l => l.Id.Equals(leilaoId));

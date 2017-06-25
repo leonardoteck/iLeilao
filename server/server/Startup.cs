@@ -12,6 +12,7 @@ using System.Text;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using server.Controllers;
 
 namespace server
 {
@@ -26,7 +27,7 @@ namespace server
              Configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json")                
-                .Build();
+                .Build();          
         }
 
         
@@ -37,7 +38,7 @@ namespace server
             services.AddOptions();
             services.AddCors();
             services.AddAuthorization();
-            
+            //services.AddSingleton<CronometroController>();
             //Configuração da Entity Framework + PostgreSQL
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<LeilaoContext>(
@@ -68,7 +69,7 @@ namespace server
                 options.Issuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
                 options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
                 options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
-            });
+            });           
         }
 
 
@@ -133,7 +134,6 @@ namespace server
                      });
                  });
             }
-
         }
     }
 }
