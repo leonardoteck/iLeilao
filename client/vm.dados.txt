@@ -1,0 +1,18 @@
+Solicitações
+==============
+vm.dados.tempoLimiteDias : number
+vm.dados.tempoLimiteHoras : number
+vm.dados.tempoLimiteMinutos : number
+vm.dados.tempoLimiteSegundos : number
+vm.dados.dataFinalAno : number
+vm.dados.dataFinalMes : number
+vm.dados.dataFinalDia : number
+vm.dados.incrementoMinimo : number
+vm.dados.lote : object
+vm.dados.lote.valorMinimo : number
+vm.dados.lote.produtos : array
+vm.dados.lote.produtos.nome : string
+vm.dados.lote.produtos.descricao : string
+vm.dados.lote.produtos.quantidade : number
+
+
