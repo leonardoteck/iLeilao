@@ -1,17 +1,19 @@
 <ion-view view-title="Login">
     
-    <ion-content class="padding padrao">
+    <ion-content class="padding padrao" style="background: #30e3ca !important">
         
-        <img class="logo" src="img/martelo.jpeg">
+        <img class="logo" src="img/martelo2.png">
 
+        <h1 style="text-align: center; font-size: 40px">iLeilão</h1>
+        <h4 style="text-align: center;">Onde se agrega valor.</h4>
         <div class="row">
-            <div class="col borda">
+            <div class="col padrao borda">
                 <form name="login" ng-submit="vm.fazerLogin()">
                     <h4>Entre:</h4>
                     <label class="item item-input">
                         <input ng-model="vm.dados.user" type="email" placeholder="E-mail" required name="email">
                     </label>
-
+                    
                     <ion-checkbox style="width: 104px; position: absolute; right: 137px" ng-model="vm.apiOn" ng-click="vm.apiChange()">API</ion-checkbox>
                     <ion-checkbox style="width: 112px; position: absolute; right: 26px" ng-model="vm.part" ng-click="vm.tipoChange()">Part.</ion-checkbox>
                     <br>
