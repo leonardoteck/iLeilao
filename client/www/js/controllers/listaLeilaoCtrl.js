@@ -9,7 +9,7 @@
     function listaController($scope, $http, api, auth, $ionicPopup, $state) {
         var vm = this;
 
-        vm.Dados = {};
+        vm.dados = {};
         vm.tipoUsuario = 0;
 
         activate();
@@ -47,7 +47,7 @@
 
         function carregarDados() {
             if (!api.on()) {
-                vm.Dados.leiloes = [];
+                vm.dados.leiloes = [];
 
                 return;
             }
@@ -57,8 +57,8 @@
             //     url: api.url() + 'movimentacoes/usuario/' + auth.data.config.usuario.Id,
             //     headers: { 'Authorization': 'Bearer ' + auth.data.tokenUsuario.tokenUsuario }
             // }).success(function (data) {
-            //     vm.Dados.Movimentacoes = data;
-            //     filtrarMovs(vm.Dados.Movimentacoes);
+            //     vm.dados.Movimentacoes = data;
+            //     filtrarMovs(vm.dados.Movimentacoes);
             // }).error(function (data) {
             //     console.log(data);
             //     $ionicPopup.alert({

@@ -1,12 +1,11 @@
 Solicitações
 ==============
+vm.dados.nome : string
 vm.dados.tempoLimiteDias : number
 vm.dados.tempoLimiteHoras : number
 vm.dados.tempoLimiteMinutos : number
 vm.dados.tempoLimiteSegundos : number
-vm.dados.dataFinalAno : number
-vm.dados.dataFinalMes : number
-vm.dados.dataFinalDia : number
+vm.dados.diasDucarao: number
 vm.dados.incrementoMinimo : number
 vm.dados.lote : object
 vm.dados.lote.valorMinimo : number
@@ -15,4 +14,5 @@ vm.dados.lote.produtos.nome : string
 vm.dados.lote.produtos.descricao : string
 vm.dados.lote.produtos.quantidade : number
 
-
+vm.addProduto() : para adicionar um produto na lista de produtos
+vm.removeProduto(index) : para remover um produto da lista

@@ -9,7 +9,7 @@
     function cadastroController($http, api, auth, $ionicPopup, $state) {
         var vm = this;
 
-        vm.Dados = {};
+        vm.dados = {};
         
         vm.cadastrar = cadastrar;
 
@@ -32,7 +32,7 @@
             $http({
                 method: 'POST',
                 url: api.url() + 'usuarios/',
-                data: vm.Dados
+                data: vm.dados
             }).success(function (data) {
                 auth.done = true;
                 auth.data = data;
