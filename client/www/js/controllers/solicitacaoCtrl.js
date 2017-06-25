@@ -18,8 +18,6 @@
         };
 
         vm.salvarDados = salvarDados;
-        vm.addProduto = addProduto;
-        vm.removeProduto = removeProduto;
         vm.base64 = base64;
 
         activate();
@@ -37,23 +35,19 @@
         function carregarDados() {
             if (!api.on()) {
                 vm.dados = {
-                    "id": 1,
+                    "nome": "Moto G2 - Caiu do caminhão",
                     "tempoLimiteLance": "03:00:25",
-                    "loteId": 1,
                     "diasDuracao": 20,
                     "incrementoMinimo": 30,
                     "status": 0,
                     "usuarioId": "1ff83f28-8d42-4fb0-a976-c13344d70917",
                     "lote": {
-                        "id": 1,
                         "produtos": [
                             {
-                                "id": 1,
                                 "nome": "Moto G",
                                 "descricao": "2nd Generation",
                                 "quantidade": 4,
                                 "imagem": "http://www.comprasparaguai.com.br/media/fotos/modelos/celular_motorola_moto_g_xt_1068_dual_chip_8gb_26740_550x550.png",
-                                "loteId": 1
                             }
                         ],
                         "valorMinimo": 30,
@@ -98,24 +92,11 @@
             data.tempoLimiteSegundos = tempo[2];
         }
 
-        function addProduto() {
-            vm.dados.lote.produtos.push({});
-        }
-
-        function removeProduto(index) {
-            vm.dados.produtos.splice(index, 1);
-        }
-
         function salvarDados() {
             var dados = JSON.parse(JSON.stringify(vm.dados));
 
-            // Validação
-                var dataAtual = new Date();
-                if (dataAtual.valueOf() > vm.dados.DataFinal.valueOf()) {
-                    $ionicPopup.alert({ title: 'Atenção!', template: 'A data final deve ser após a data atual' });
-                }
             // Formatando alguns dados para a API entender
-                dados.tempoLimiteLance = vm.dados.tempoLimiteDias + '.' +
+                dados.tempoLimiteLance = vm.dados.tempoLimiteDias || 0 + '.' +
                     vm.dados.tempoLimiteHoras + ':' +
                     vm.dados.tempoLimiteMinutos + ':' +
                     vm.dados.tempoLimiteSegundos;
@@ -143,16 +124,16 @@
             };
             var msg = 'Solicitação cadastrada com sucesso!';
 
-            if (vm.dados.Id) {
+            if (vm.dados.id) {
                 request.method = 'PUT';
-                request.url += vm.dados.Id;
+                request.url += '/' + vm.dados.id;
                 var msg = 'Solicitação alterada com sucesso!';
             }
 
             $http(request)
             .success(function (data) {
-                $ionicPopup.alert({ title: 'Sucesso!', template: msg });
                 console.log(data);
+                $ionicPopup.alert({ title: 'Sucesso!', template: msg });
             })
             .error(function (data) {
                 console.log(data);
@@ -160,15 +141,22 @@
             });
         }
 
-        function base64(entidade, elemento) {
+        function base64(elemento) {
+            if (!elemento.files || elemento.files.length < 1) return;
+            var file = elemento.files[0];
+            if (file.size > 512000) {
+                elemento.files.splice(0, 1);
+                $ionicPopup.alert({ title: 'Atenção!', template: 'Selecione uma imagem com menos de 500KB!' });
+                return;
+            }
+
             var reader = new FileReader();
             reader.onloadend = function() {
-                $scope.$eval(entidade + '=' + '"' + reader.result + '"')
-                // entidade.imagem = reader.result;
-                console.log(reader.result);
+                $scope.$eval(elemento.name + '=' + '"' + reader.result + '"')
                 $timeout(function () {});
             }
-            reader.readAsDataURL(elemento.files[0]);
+            reader.readAsDataURL(file);
+            console.dir(file);
         }
     }
 })();
