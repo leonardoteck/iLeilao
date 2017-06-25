@@ -19,6 +19,8 @@
 
         vm.salvarDados = salvarDados;
         vm.base64 = base64;
+        vm.aceitar = aceitar;
+        vm.recusar = recusar;
 
         activate();
 
@@ -134,6 +136,38 @@
             .success(function (data) {
                 console.log(data);
                 $ionicPopup.alert({ title: 'Sucesso!', template: msg });
+            })
+            .error(function (data) {
+                console.log(data);
+                $ionicPopup.alert({ title: 'Ops!', template: data[0].errorMessage });
+            });
+        }
+
+        function aceitar() {
+            $http({
+                method: 'POST',
+                url: api.url() + 'solicitacoes/aprovar/' + vm.dados.id,
+                headers: { 'Authorization': 'Bearer ' + auth.token }
+            })
+            .success(function (data) {
+                console.log(data);
+                $ionicPopup.alert({ title: 'Sucesso!', template: 'Solicitação aprovada com sucesso.' });
+            })
+            .error(function (data) {
+                console.log(data);
+                $ionicPopup.alert({ title: 'Ops!', template: data[0].errorMessage });
+            });
+        }
+
+        function recusar() {
+            $http({
+                method: 'POST',
+                url: api.url() + 'solicitacoes/reprovar/' + vm.dados.id,
+                headers: { 'Authorization': 'Bearer ' + auth.token }
+            })
+            .success(function (data) {
+                console.log(data);
+                $ionicPopup.alert({ title: 'Sucesso!', template: 'Solicitação aprovada com sucesso.' });
             })
             .error(function (data) {
                 console.log(data);
