@@ -10,6 +10,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using System;
+using MailKit.Net.Smtp;
+using MimeKit;
 
 namespace server.Controllers
 {
@@ -54,7 +56,8 @@ namespace server.Controllers
                             tokenUsuario = await Token(usuario),
                             expira_em = (int)jwtOptions.ValidFor.TotalSeconds,
                             tokenNome = "Authorization"
-                        }, usuario                       
+                        },
+                        usuario
                     });
                 }
                 else
@@ -70,6 +73,69 @@ namespace server.Controllers
             }
         }
 
+        [HttpPost("recuperar")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RecuperarSenha([FromBody] string email)
+        {
+            try
+            {
+                //busca o usuário pelo email
+                Usuario usuario = await userManager.FindByEmailAsync(email);
+                if (usuario != null)
+                {
+                    string novaSenha = Guid.NewGuid().ToString();
+                    usuario.PasswordHash = passwordHasher.HashPassword(usuario, novaSenha);
+
+                    string Remetente = "ileilaoscs@gmail.com";
+                    string TituloRemetente = "iLeilao";
+
+                    string Destinatario = email;
+                    string TituloDestinatario = usuario.Nome;
+
+                    string Assunto = "Recuperação de senha iLeilão";
+                    string Conteudo =
+                        $"Olá {usuario.Nome}.\n\n" +
+                        "Se não foi você que solicitou recuperação de senha no app iLeilão, por favor, ignore este e - mail.\n" +
+                        $"Se foi você, use esta senha temporária: {novaSenha}\n\n" +
+                        "Obrigado!";
+
+                    string SmtpServer = "smtp.gmail.com";
+                    int SmtpPorta = 465;
+
+                    var mimeMessage = new MimeMessage();
+                    mimeMessage.From.Add(new MailboxAddress(TituloRemetente, Remetente));
+                    mimeMessage.To.Add(new MailboxAddress(TituloDestinatario, Destinatario));
+                    mimeMessage.Subject = Assunto;
+                    mimeMessage.Body = new TextPart("plain")
+                    {
+                        Text = Conteudo
+                    };
+
+                    using (var client = new SmtpClient())
+                    {
+                        await client.ConnectAsync(SmtpServer, SmtpPorta, true);
+
+                        await client.AuthenticateAsync(Remetente, "s0000000000");
+
+                        await client.SendAsync(mimeMessage);
+
+                        await client.DisconnectAsync(true);
+
+                        await context.SaveChangesAsync();
+
+                        return Ok();
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Usuário", "Email Inválido");
+                    return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
+                }
+            }catch(Exception e)
+            {
+                return Ok(e.Message);
+            }
+        }
 
         private async Task<string> Token(Usuario usuario)
         {
