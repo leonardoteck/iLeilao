@@ -9,9 +9,10 @@ using server.Models;
 namespace server.Migrations
 {
     [DbContext(typeof(LeilaoContext))]
-    partial class LeilaoContextModelSnapshot : ModelSnapshot
+    [Migration("20170624194100_nomeSolicitacao")]
+    partial class nomeSolicitacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -167,15 +168,11 @@ namespace server.Migrations
 
                     b.Property<TimeSpan>("TempoLimiteLance");
 
-                    b.Property<string>("UsuarioId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("LoteId");
 
                     b.HasIndex("MaiorLanceId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Leilao");
                 });
@@ -184,9 +181,6 @@ namespace server.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Imagem")
-                        .HasColumnType("varchar");
 
                     b.Property<decimal>("ValorMinimo");
 
@@ -227,7 +221,9 @@ namespace server.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("DiasDuracao");
+                    b.Property<DateTime>("DataFinal");
+
+                    b.Property<DateTime>("DataInicial");
 
                     b.Property<decimal>("IncrementoMinimo");
 
@@ -364,10 +360,6 @@ namespace server.Migrations
                     b.HasOne("server.Models.Lance", "MaiorLance")
                         .WithMany()
                         .HasForeignKey("MaiorLanceId");
-
-                    b.HasOne("server.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("server.Models.Lote", b =>

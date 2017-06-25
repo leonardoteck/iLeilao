@@ -54,7 +54,7 @@ namespace server.Controllers
                             tokenUsuario = await Token(usuario),
                             expira_em = (int)jwtOptions.ValidFor.TotalSeconds,
                             tokenNome = "Authorization"
-                        }                       
+                        }, usuario                       
                     });
                 }
                 else

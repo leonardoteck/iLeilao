@@ -9,9 +9,10 @@ using server.Models;
 namespace server.Migrations
 {
     [DbContext(typeof(LeilaoContext))]
-    partial class LeilaoContextModelSnapshot : ModelSnapshot
+    [Migration("20170625031021_correcaoUsuarioId")]
+    partial class correcaoUsuarioId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -155,6 +156,9 @@ namespace server.Migrations
 
                     b.Property<DateTime>("DataInicio");
 
+                    b.Property<string>("Imagem")
+                        .HasColumnType("varchar");
+
                     b.Property<decimal>("IncrementoMinimo");
 
                     b.Property<int>("LoteId");
@@ -184,9 +188,6 @@ namespace server.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Imagem")
-                        .HasColumnType("varchar");
 
                     b.Property<decimal>("ValorMinimo");
 
@@ -228,6 +229,9 @@ namespace server.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("DiasDuracao");
+
+                    b.Property<string>("Imagem")
+                        .HasColumnType("varchar");
 
                     b.Property<decimal>("IncrementoMinimo");
 

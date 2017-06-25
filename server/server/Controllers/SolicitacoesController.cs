@@ -29,11 +29,18 @@ namespace server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var solicitacoes = context.Solicitacao
-                .Include(s => s.Lote)
-                .Include(s => s.Lote.Produtos);
+            try
+            {
+                var solicitacoes = context.Solicitacao
+                    .Include(s => s.Lote)
+                    .Include(s => s.Lote.Produtos);
 
-            return Ok(solicitacoes);
+                return Ok(solicitacoes);
+            }
+            catch (Exception e)
+            {
+                return Ok(e.Message);
+            }
         }
 
         //Pega todas as solicitações do usuário
@@ -41,11 +48,18 @@ namespace server.Controllers
         [HttpGet("usuario/{usuarioId}")]
         public IActionResult GetUsuario([FromRoute] string usuarioId)
         {
-            var solicitacoes = context.Solicitacao
-                .Include(s => s.Lote)
-                .Include(s => s.Lote.Produtos)
-                .Where(s => s.UsuarioId.Equals(usuarioId));
-            return Ok(solicitacoes);
+            try
+            {
+                var solicitacoes = context.Solicitacao
+                    .Include(s => s.Lote)
+                    .Include(s => s.Lote.Produtos)
+                    .Where(s => s.UsuarioId.Equals(usuarioId));
+                return Ok(solicitacoes);
+            }
+            catch (Exception e)
+            {
+                return Ok(e.Message);
+            }
         }
 
         //Pega todas solicitações pendentes
@@ -53,11 +67,18 @@ namespace server.Controllers
         [HttpGet("pendentes")]
         public IActionResult GetPendentes()
         {
-            var solicitacoes = context.Solicitacao
-                .Include(s => s.Lote)
-                .Include(s => s.Lote.Produtos)
-                .Where(s => s.Status.Equals(StatusSolicitacao.EmAguardo));
-            return Ok(solicitacoes);
+            try
+            {
+                var solicitacoes = context.Solicitacao
+                    .Include(s => s.Lote)
+                    .Include(s => s.Lote.Produtos)
+                    .Where(s => s.Status.Equals(StatusSolicitacao.EmAguardo));
+                return Ok(solicitacoes);
+            }
+            catch (Exception e)
+            {
+                return Ok(e.Message);
+            }
         }
 
         //Pega uma solicitação específica
@@ -65,19 +86,26 @@ namespace server.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            var solicitacao = await context.Solicitacao
-                .Include(s => s.Lote)
-                .Include(s => s.Lote.Produtos)
-                .FirstOrDefaultAsync(s => s.Id.Equals(id));
+            try
+            {
+                var solicitacao = await context.Solicitacao
+                    .Include(s => s.Lote)
+                    .Include(s => s.Lote.Produtos)
+                    .FirstOrDefaultAsync(s => s.Id.Equals(id));
 
-            if (solicitacao != null)
-            {
-                return Ok(solicitacao);
+                if (solicitacao != null)
+                {
+                    return Ok(solicitacao);
+                }
+                else
+                {
+                    ModelState.AddModelError("Solicitação", "Solicitação não encontrada.");
+                    return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                }
             }
-            else
+            catch (Exception e)
             {
-                ModelState.AddModelError("Solicitação", "Solicitação não encontrada.");
-                return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                return Ok(e.Message);
             }
         }
 
@@ -85,43 +113,55 @@ namespace server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit([FromRoute] int id, [FromBody] Solicitacao novaSolicitacao)
         {
-            var solicitacao = await context.Solicitacao.AsNoTracking().FirstOrDefaultAsync(s => s.Id.Equals(novaSolicitacao.Id));
-
-            if (solicitacao != null)
+            try
             {
-                solicitacao = novaSolicitacao;
+                var solicitacao = await context.Solicitacao.AsNoTracking().FirstOrDefaultAsync(s => s.Id.Equals(novaSolicitacao.Id));
 
-                context.Solicitacao.Update(solicitacao);
-                await context.SaveChangesAsync();
+                if (solicitacao != null)
+                {
+                    solicitacao = novaSolicitacao;
 
-                return Ok(solicitacao);
+                    context.Solicitacao.Update(solicitacao);
+                    await context.SaveChangesAsync();
+
+                    return Ok(solicitacao);
+                }
+                else
+                {
+                    ModelState.AddModelError("Solicitação", "Solicitação não encontrada.");
+                    return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                }
             }
-            else
+            catch (Exception e)
             {
-                ModelState.AddModelError("Solicitação", "Solicitação não encontrada.");
-                return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                return Ok(e.Message);
             }
-
         }
 
         // POST: api/Solicitacoes
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Solicitacao solicitacao)
         {
-
-            var usuarioExists = await context.Users.AnyAsync(u => u.Id.Equals(solicitacao.UsuarioId));
-
-            if (usuarioExists)
+            try
             {
-                context.Solicitacao.Add(solicitacao);
-                await context.SaveChangesAsync();
+                var usuarioExists = await context.Users.AnyAsync(u => u.Id.Equals(solicitacao.UsuarioId));
 
-                return CreatedAtAction("Create", solicitacao);
+                if (usuarioExists)
+                {
+                    context.Solicitacao.Add(solicitacao);
+                    await context.SaveChangesAsync();
+
+                    return CreatedAtAction("Create", solicitacao);
+                }
+                else
+                {
+                    ModelState.AddModelError("Usuario", "Usuário não cadastrado no sistema.");
+                    return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                }
             }
-            else
+            catch (Exception e)
             {
-                ModelState.AddModelError("Usuario", "Usuário não cadastrado no sistema.");
-                return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                return Ok(e.Message);
             }
         }
 
@@ -130,24 +170,31 @@ namespace server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var solicitacao = await context.Solicitacao
-                .Include(s => s.Lote)
-                .FirstOrDefaultAsync(s => s.Id.Equals(id));
+            try
+            {
+                var solicitacao = await context.Solicitacao
+                    .Include(s => s.Lote)
+                    .FirstOrDefaultAsync(s => s.Id.Equals(id));
 
-            if (solicitacao != null)
-            {
-                //Nem Lote nem Produto dependem de Solicitação, então se deletar a solicitação, 
-                //produtos e lote se mantém
-                //mas ao apagar o lote (que é relação tanto de solicitação, quanto de produto, 
-                //a solicitação e os produtos tbm são apagados
-                context.Lote.Remove(solicitacao.Lote);
-                await context.SaveChangesAsync();
-                return Ok();
+                if (solicitacao != null)
+                {
+                    //Nem Lote nem Produto dependem de Solicitação, então se deletar a solicitação, 
+                    //produtos e lote se mantém
+                    //mas ao apagar o lote (que é relação tanto de solicitação, quanto de produto, 
+                    //a solicitação e os produtos tbm são apagados
+                    context.Lote.Remove(solicitacao.Lote);
+                    await context.SaveChangesAsync();
+                    return Ok();
+                }
+                else
+                {
+                    ModelState.AddModelError("Solicitação", "Solicitação não existe no sistema.");
+                    return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                }
             }
-            else
+            catch (Exception e)
             {
-                ModelState.AddModelError("Solicitação", "Solicitação não existe no sistema.");
-                return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                return Ok(e.Message);
             }
         }
 
@@ -155,25 +202,34 @@ namespace server.Controllers
         [HttpPost("aprovar/{id}")]
         public async Task<IActionResult> Aprovar([FromRoute] int id)
         {
-            var solicitacao = await context.Solicitacao
-                .Include(s => s.Lote)
-                .Include(s => s.Lote.Produtos)
-                .FirstOrDefaultAsync(s => s.Id.Equals(id));
-
-            if (solicitacao != null)
+            try
             {
-                solicitacao.Status = StatusSolicitacao.Aceito;
+                var solicitacao = await context.Solicitacao
+                    .Include(s => s.Lote)
+                        .ThenInclude(l => l.Produtos)
+                    .FirstOrDefaultAsync(s => s.Id.Equals(id) && s.Status.Equals(StatusSolicitacao.EmAguardo));
 
-                context.Solicitacao.Update(solicitacao);
-                await context.SaveChangesAsync();
+                if (solicitacao != null)
+                {
+                    solicitacao.Status = StatusSolicitacao.Aceito;
 
-                //CHAMAR O CONTROLE DE LEILÃO PARA A CRIAÇÃO
-                return Ok(solicitacao);
+                    context.Solicitacao.Update(solicitacao);
+                    await context.SaveChangesAsync();
+
+                    var leiloesController = new LeiloesController(context);
+                    var leilao = await leiloesController.Create(solicitacao);
+
+                    return Ok(leilao);
+                }
+                else
+                {
+                    ModelState.AddModelError("Solicitação", "Solicitação não encontrada para aprovação.");
+                    return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                }
             }
-            else
+            catch (Exception e)
             {
-                ModelState.AddModelError("Solicitação", "Solicitação não existe no sistema.");
-                return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                return Ok(e.Message);
             }
         }
 
@@ -181,64 +237,31 @@ namespace server.Controllers
         [HttpPost("reprovar/{id}")]
         public async Task<IActionResult> Reprovar([FromRoute] int id)
         {
-            var solicitacao = await context.Solicitacao
-                .Include(s => s.Lote)
-                .Include(s => s.Lote.Produtos)
-                .FirstOrDefaultAsync(s => s.Id.Equals(id));
-
-            if (solicitacao != null)
+            try
             {
-                solicitacao.Status = StatusSolicitacao.Negado;
+                var solicitacao = await context.Solicitacao
+                    .Include(s => s.Lote)
+                    .Include(s => s.Lote.Produtos)
+                    .FirstOrDefaultAsync(s => s.Id.Equals(id));
 
-                context.Solicitacao.Update(solicitacao);
-                await context.SaveChangesAsync();
+                if (solicitacao != null)
+                {
+                    solicitacao.Status = StatusSolicitacao.Negado;
 
-                return Ok(solicitacao);
+                    context.Solicitacao.Update(solicitacao);
+                    await context.SaveChangesAsync();
+
+                    return Ok(solicitacao);
+                }
+                else
+                {
+                    ModelState.AddModelError("Solicitação", "Solicitação não existe no sistema.");
+                    return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                }
             }
-            else
+            catch (Exception e)
             {
-                ModelState.AddModelError("Solicitação", "Solicitação não existe no sistema.");
-                return NotFound(ModelState.Values.SelectMany(e => e.Errors));
-            }
-        }
-
-        [HttpPost("imagem/{id}")]
-        public async Task<IActionResult> AddImagem([FromRoute] int id, [FromForm] IFormFile Imagem)
-        {
-            var produto = await context.Produto.FirstOrDefaultAsync(p => p.Id.Equals(id));
-
-            if (produto != null)
-            {
-                //Abre a imagem como uma stream de dados
-                var stream = Imagem.OpenReadStream();
-                //Stream de memoria para qual a imagem será passada
-                var ms = new MemoryStream();
-
-                //passando o arquivo da imagem para stream de memoria
-                await stream.CopyToAsync(ms);
-
-                //passando o stream de memória para byte[]
-                var bytes = ms.ToArray();
-
-                //passando o byte[] para string base64
-                string img = Convert.ToBase64String(bytes);
-
-                //formatando a string para funcionamento no navegador (uso de string interpolation)
-                img = string.Format($"data:{Imagem.ContentType};base64,{img}");
-
-                produto.Imagem = img;
-                context.Produto.Update(produto);
-
-                await context.SaveChangesAsync();
-
-                //Retorno
-                return Ok(produto);
-
-            }
-            else
-            {
-                ModelState.AddModelError("Produto", "Produto não existe no sistema.");
-                return NotFound(ModelState.Values.SelectMany(e => e.Errors));
+                return Ok(e.Message);
             }
         }
     }

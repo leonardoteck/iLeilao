@@ -22,17 +22,12 @@ namespace server.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Ignore<LoginModel>();
-            //builder.Ignore<JwtIssuerOptions>();
+            builder.Ignore<LeilaoLista>();
 
             builder.Entity<Lance>()
                  .HasOne(lance => lance.Leilao)
                  .WithMany(leilao => leilao.Lances)
                  .HasForeignKey(lance => lance.LeilaoId);
-
-            builder.Entity<Leilao>()
-                .HasOne(leilao => leilao.MaiorLance)
-                .WithMany()
-                .HasForeignKey(leilao => leilao.MaiorLanceId);
 
             base.OnModelCreating(builder);
         }       

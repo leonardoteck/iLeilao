@@ -9,9 +9,10 @@ using server.Models;
 namespace server.Migrations
 {
     [DbContext(typeof(LeilaoContext))]
-    partial class LeilaoContextModelSnapshot : ModelSnapshot
+    [Migration("20170625022900_DiasDuracao")]
+    partial class DiasDuracao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -155,6 +156,9 @@ namespace server.Migrations
 
                     b.Property<DateTime>("DataInicio");
 
+                    b.Property<string>("Imagem")
+                        .HasColumnType("varchar");
+
                     b.Property<decimal>("IncrementoMinimo");
 
                     b.Property<int>("LoteId");
@@ -167,7 +171,7 @@ namespace server.Migrations
 
                     b.Property<TimeSpan>("TempoLimiteLance");
 
-                    b.Property<string>("UsuarioId");
+                    b.Property<string>("usuarioId");
 
                     b.HasKey("Id");
 
@@ -175,7 +179,7 @@ namespace server.Migrations
 
                     b.HasIndex("MaiorLanceId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("usuarioId");
 
                     b.ToTable("Leilao");
                 });
@@ -184,9 +188,6 @@ namespace server.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Imagem")
-                        .HasColumnType("varchar");
 
                     b.Property<decimal>("ValorMinimo");
 
@@ -228,6 +229,9 @@ namespace server.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("DiasDuracao");
+
+                    b.Property<string>("Imagem")
+                        .HasColumnType("varchar");
 
                     b.Property<decimal>("IncrementoMinimo");
 
@@ -367,7 +371,7 @@ namespace server.Migrations
 
                     b.HasOne("server.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("usuarioId");
                 });
 
             modelBuilder.Entity("server.Models.Lote", b =>

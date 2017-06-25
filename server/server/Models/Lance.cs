@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server.Models
@@ -11,6 +12,7 @@ namespace server.Models
         public string UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
         public int LeilaoId { get; set; }
+        [JsonIgnore]
         public Leilao Leilao { get; set; }
     }
 }

@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace server.Models
 {
@@ -22,10 +20,13 @@ namespace server.Models
         public TimeSpan TempoLimiteLance { get; set; }
         public int LoteId { get; set; }
         public int? MaiorLanceId { get; set; }
+        public string UsuarioId { get; set; }
         public decimal IncrementoMinimo { get; set; }
         public StatusLeilao Status { get; set; }
         public Lance MaiorLance { get; set; }
         public IEnumerable<Lance> Lances { get; set; }
         public Lote Lote { get; set; }
+        [JsonIgnore]
+        public Usuario Usuario { get; set; }
     }
 }
