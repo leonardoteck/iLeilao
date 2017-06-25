@@ -102,7 +102,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'templates/visualizar.html'
+                templateUrl: 'templates/visualizar.html',
+                controller: 'leilaoController',
+                controllerAs: 'vm'
             }
         }
     })

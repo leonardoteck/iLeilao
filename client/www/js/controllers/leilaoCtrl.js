@@ -3,10 +3,10 @@
 
     angular
         .module('starter.controllers')
-        .controller('listaController', listaController);
+        .controller('leilaoController', leilaoController);
 
-    listaController.$inject = ['$scope', '$http', 'api', 'auth', '$ionicPopup', '$state', '$interval'];
-    function listaController($scope, $http, api, auth, $ionicPopup, $state, $interval) {
+    leilaoController.$inject = ['$scope', '$http', 'api', 'auth', '$ionicPopup', '$state', '$interval'];
+    function leilaoController($scope, $http, api, auth, $ionicPopup, $state, $interval) {
         var vm = this;
 
         vm.dados = {};
@@ -32,6 +32,12 @@
                     url: api.url() + 'leiloes/' + $state.params.id,
                     headers: { 'Authorization': 'Bearer ' + auth.token }
                 }).success(function (data) {
+                    if (!vm.dados.maiorLance && !data.maiorLance)
+                        return;
+                    if (!vm.dados.maiorLance && data.maiorLance) {
+                        vm.dados.maiorLance = data.maiorLance;
+                        return;
+                    }
                     if (data.maiorLance.id != vm.dados.maiorLance.id)
                         vm.dados.maiorLance = data.maiorLance;
                     if (data.status != 0) {
