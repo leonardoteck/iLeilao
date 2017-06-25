@@ -36,7 +36,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         url: '/solicitacoes',
         views: {
             'menuContent': {
-                templateUrl: 'templates/solicitacoes.html'
+                templateUrl: 'templates/solicitacoes.html',
+                controller: 'listaController',
+                controllerAs: 'vm'
             }
         }
     })
@@ -60,32 +62,34 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     })
 
     .state('app.acompanha', {
-            url: '/acompanha',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/acompanha.html'
-                }
+        url: '/acompanha',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/acompanha.html',
+                controller: 'listaController',
+                controllerAs: 'vm'
             }
-        })
-        .state('app.principal', {
-            url: '/principal',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/principal.html',
-                    controller: 'principalController',
-                    controllerAs: 'vm'
-                }
+        }
+    })
+    .state('app.principal', {
+        url: '/principal',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/principal.html',
+                controller: 'principalController',
+                controllerAs: 'vm'
             }
-        })
+        }
+    })
 
-        .state('app.visualizar', {
-            url: '/visualizar',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/visualizar.html'
-                }
+    .state('app.visualizar', {
+        url: '/visualizar',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/visualizar.html'
             }
-        })
+        }
+    })
 
            .state('app.encerrados', {
             url: '/encerrados',
@@ -112,7 +116,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         views: {
             'menuContent': {
                 templateUrl: 'templates/leiloei.html',
-                controller: 'PlaylistsCtrl'
+                controller: 'listaController',
+                controllerAs: 'vm'
             }
         }
     })
@@ -122,7 +127,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         url: '/andamento',
         views: {
             'menuContent': {
-                templateUrl: 'templates/andamento.html'
+                templateUrl: 'templates/andamento.html',
+                controller: 'listaController',
+                controllerAs: 'vm'
             }
         }
     })
@@ -131,20 +138,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         url: '/destaque',
         views: {
             'menuContent': {
-                templateUrl: 'templates/destaque.html'
-            }
-        }
-    })
-
-    .state('app.single', {
-        url: '/playlists/:playlistId',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/playlist.html',
-                controller: 'PlaylistCtrl'
+                templateUrl: 'templates/destaque.html',
+                controller: 'listaController',
+                controllerAs: 'vm'
             }
         }
     });
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
 });
