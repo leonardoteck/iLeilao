@@ -20,34 +20,31 @@
     </ion-header-bar>
     <ion-content class="gohorse">
       <ion-list> 
-        <ion-item menu-close href="#/app/login" class="item">
-          Login
-        </ion-item>
         <ion-item menu-close href="#/app/principal" class="item">
           Tela Inicial
         </ion-item>
         <ion-item menu-close href="#/app/andamento" class="item">
           Leilões em andamento
         </ion-item>
-        <ion-item menu-close href="#/app/acompanha" class="item">
+        <ion-item menu-close href="#/app/acompanha" class="item" ng-show="participante">
           Leilões que acompanho(participante)
         </ion-item>
-         <ion-item menu-close href="#/app/acompanha" class="item">
+         <ion-item menu-close href="#/app/encerrados" class="item" ng-show="!participante">
           Leilões encerrados(leiloeiro)
         </ion-item>
-        <ion-item menu-close href="#/app/leiloei" class="item"> 
+        <ion-item menu-close href="#/app/leiloei" class="item" ng-show="participante"> 
           Produtos que leiloei(participante)
         </ion-item>
-        <ion-item menu-close href="#/app/solicitacoes" class="item">
+        <ion-item menu-close href="#/app/solicitacoes" class="item" ng-show="participante">
           Solicitações(participante)
         </ion-item>
-        <ion-item menu-close href="#/app/solicitacoes" class="item">
+        <ion-item menu-close href="#/app/solicitacoes" class="item" ng-show="!participante">
           Solicitações de leilão(leiloeiro)
         </ion-item>
-        <ion-item menu-close href="#/app/solicitacoes_part" class="item">
+        <ion-item menu-close href="#/app/solicitacoes_part" class="item" ng-show="participante">
           Leiloar um produto(participante)
         </ion-item>
-        <ion-item menu-close href="#/app/solicitacoes_leilo" class="item">
+        <ion-item menu-close href="#/app/solicitacoes_leilo" class="item" ng-show="!participante">
           Leiloar um produto(leiloeiro)
         </ion-item>
         <ion-item menu-close href="#/app/search" class="item">

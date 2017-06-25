@@ -87,6 +87,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         })
 
+           .state('app.encerrados', {
+            url: '/encerrados',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/encerrados.html'
+                }
+            }
+        })
+
     .state('login', {
         url: '/login',
        // views: {

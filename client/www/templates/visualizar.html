@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">  
+                        <div class="col" ng-show="!participante">  
                             Inc.: R$10,00
                         </div>
                     </div>
@@ -31,28 +31,29 @@
                     </div>
                      <div class="row">
                         <div class="col">  
-                            <button type="submit" class="button icon-left ion-android-cart cor button-small button-block">Lance +10</button>
+                            <button type="submit" class="button icon-left ion-android-cart cor button-small button-block" ng-show="participante">Lance +10
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <h5>Inserir valor do lance: </h5>
-            <div class="row">
+            <h5 ng-show="participante">Inserir valor do lance: </h5>
+            <div class="row" ng-show="participante">
                 <div class="col">  
-                    <label type="submit" class="item item-input item-select">Lance +10</label>
+                    <label type="submit" class="item item-input item-select" >Lance +10</label>
                 </div>
                 <div class="col">  
                      <button type="submit" class="button cor button-small">Lance!</button>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" ng-show="!participante">
                 <div class="col" >  
                     <button type="submit" class="button icon-left ion-android-hand cor button-block">Encerrar</button>
                 </div>
             </div>
             <br>
             <span>Vendedor: Michael</span>
-            <span style="float: right;" >M.L. por: Dougras</span>
+            <span style="float: right;" ng-show="!participante">M.L. por: Dougras</span>
             <h4>Produtos:</h4>
             <div class="row">
                 <div class="col bord col-center col-25">
