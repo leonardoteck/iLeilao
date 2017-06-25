@@ -17,6 +17,8 @@ vm.dados.lote.produtos : array
 vm.dados.lote.produtos.nome : string
 vm.dados.lote.produtos.descricao : string
 vm.dados.lote.produtos.quantidade : number
+vm.dados.lote.produtos.imagem : imagem
 
 vm.addProduto() : para adicionar um produto na lista de produtos
 vm.removeProduto(index) : para remover um produto da lista
+vm.salvarDados() : para criar ou alterar uma solicitação

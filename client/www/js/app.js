@@ -47,7 +47,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         url: '/solicitacoes_part',
         views: {
             'menuContent': {
-                templateUrl: 'templates/solicitacoes_part.html'
+                templateUrl: 'templates/solicitacoes_part.html',
+                controller: 'solicitacaoController',
+                controllerAs: 'vm'
             }
         }
     })
@@ -56,7 +58,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         url: '/solicitacoes_leilo',
         views: {
             'menuContent': {
-                templateUrl: 'templates/solicitacoes_leilo.html'
+                templateUrl: 'templates/solicitacoes_leilo.html',
+                controller: 'solicitacaoController',
+                controllerAs: 'vm'
             }
         }
     })
