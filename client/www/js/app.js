@@ -25,7 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
 
-    .state('app', {
+        .state('app', {
         url: '/app',
         abstract: true,
         templateUrl: 'templates/menu.html',
@@ -34,6 +34,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     .state('app.solicitacoes', {
         url: '/solicitacoes',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'templates/solicitacoes.html',
@@ -45,6 +46,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     .state('app.solicitacoes_part', {
         url: '/solicitacoes_part',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'templates/solicitacoes_part.html',
@@ -54,8 +56,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
     })
 
-     .state('app.solicitacoes_leilo', {
+    .state('app.solicitacoes_leilo', {
         url: '/solicitacoes_leilo',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'templates/solicitacoes_leilo.html',
@@ -66,17 +69,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     })
 
     .state('app.acompanha', {
-        url: '/acompanha',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/acompanha.html',
-                controller: 'listaController',
-                controllerAs: 'vm'
+            url: '/acompanha',
+            cache: false,
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/acompanha.html',
+                    controller: 'listaController',
+                    controllerAs: 'vm'
+                }
             }
-        }
-    })
+        })
     .state('app.principal', {
         url: '/principal',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'templates/principal.html',
@@ -88,6 +93,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     .state('app.visualizar', {
         url: '/visualizar',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'templates/visualizar.html'
@@ -95,28 +101,30 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
     })
 
-           .state('app.encerrados', {
-            url: '/encerrados',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/encerrados.html'
-                }
+    .state('app.encerrados', {
+        url: '/encerrados',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/encerrados.html'
             }
-        })
+        }
+    })
 
     .state('login', {
         url: '/login',
-       // views: {
+        // views: {
         //    'menuContent': {
-                templateUrl: 'templates/login.html',
-                controller: 'loginController',
-                controllerAs: 'vm'
-       //     }
-       // }
+        templateUrl: 'templates/login.html',
+        controller: 'loginController',
+        controllerAs: 'vm'
+            //     }
+            // }
     })
 
     .state('app.leiloei', {
         url: '/leiloei',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'templates/leiloei.html',
@@ -129,6 +137,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     .state('app.andamento', {
         url: '/andamento',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'templates/andamento.html',
@@ -140,6 +149,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     .state('app.destaque', {
         url: '/destaque',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'templates/destaque.html',
