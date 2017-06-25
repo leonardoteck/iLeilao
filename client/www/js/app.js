@@ -25,13 +25,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
 
-        .state('app', {
+    .state('app', {
         url: '/app',
         abstract: true,
         templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
     })
-
     .state('app.solicitacoes', {
         url: '/solicitacoes',
         cache: false,
@@ -43,7 +42,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
-
     .state('app.solicitacoes_part', {
         url: '/solicitacoes_part',
         cache: false,
@@ -55,7 +53,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
-
     .state('app.solicitacoes_leilo', {
         url: '/solicitacoes_leilo',
         cache: false,
@@ -67,18 +64,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
-
     .state('app.acompanha', {
-            url: '/acompanha',
-            cache: false,
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/acompanha.html',
-                    controller: 'listaController',
-                    controllerAs: 'vm'
-                }
+        url: '/acompanha',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/acompanha.html',
+                controller: 'listaController',
+                controllerAs: 'vm'
             }
-        })
+        }
+    })
     .state('app.principal', {
         url: '/principal',
         cache: false,
@@ -90,7 +86,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
-
     .state('app.visualizar', {
         url: '/visualizar',
         cache: false,
@@ -100,7 +95,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
-
     .state('app.encerrados', {
         url: '/encerrados',
         cache: false,
@@ -110,7 +104,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
-
     .state('login', {
         url: '/login',
         // views: {
@@ -121,7 +114,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             //     }
             // }
     })
-
     .state('app.leiloei', {
         url: '/leiloei',
         cache: false,
@@ -133,8 +125,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
-
-
     .state('app.andamento', {
         url: '/andamento',
         cache: false,
@@ -146,7 +136,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
-
     .state('app.destaque', {
         url: '/destaque',
         cache: false,
