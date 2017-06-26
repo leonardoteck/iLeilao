@@ -16,6 +16,11 @@
         ////////////////
 
         function activate() {
+            if (!auth.done) {
+                window.location.hash = '#/';
+                return;
+            }
+
             var url = '';
             switch ($state.current.name) {
                 case 'app.solicitacoes':
@@ -26,24 +31,19 @@
                     break;
                 case 'app.acompanha':
                     url = 'leiloes/usuario/participando/' + auth.id;
-                    return;
+                    break;
                 case 'app.leiloei':
                     url = 'leiloes/usuario/' + auth.id;
-                    return;
+                    break;
                 case 'app.andamento':
                     url = 'leiloes'
-                    return;
+                    break;
                 case 'app.destaque':
                     url = 'leiloes/populares'
-                    return;
+                    break;
                 default:
                     url = 'solicitacoes'
                     break;
-            }
-
-            if (!auth.done) {
-                window.location.hash = '#/';
-                return;
             }
             carregarDados(url);
         }

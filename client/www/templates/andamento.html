@@ -4,9 +4,9 @@
 
       <div class="list">
 	       <a class="item item-thumbnail-left" href="#"  ng-repeat="item in vm.dados">
-           <img ng-src="{{item.lote.imagem}}">
-           <h2>{{item.nome}}</h2>
-           <p>L.I: {{item.lote.valorMinimo}}  M.L: {{item.lance.valor}}</p>
+           <img ng-src="{{item.imagem}}">
+           <h2>{{item.titulo}}</h2>
+           <p>L.I: {{item.valorMinimo}}  M.L: {{item.maiorLance.valor}}</p>
         </a>
         <br>
       </div>
