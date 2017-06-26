@@ -1,0 +1,40 @@
+<ion-header-bar class="bar-stable">
+    <h1 class="title">Criar Conta</h1>
+</ion-header-bar>
+<ion-content class="padding padrao">
+    <form name="form">
+        <h4>Nome</h4>
+        <label class="item item-input">
+            <input type="text" ng-model="vm.dados.nome" required>
+        </label>
+        <h4>E-mail</h4>
+        <label class="item item-input">
+            <input type="text" ng-model="vm.dados.email" required>
+        </label>
+        <h4>Tipo de usuário</h4>
+        <label class="item item-input item-select" ng-model="vm.dados.tipo">
+            <div class="input-label">
+                Usuário
+            </div>
+            <select>
+                <option>Leiloeiro</option>
+                <option selected>Participante</option>
+            </select>
+        </label>
+
+        <h4>E-mail</h4>
+        <label class="item item-input">
+            <input type="text" ng-model="vm.Dados.email" required>
+        </label>
+        <h4>Senha</h4>
+        <label class="item item-input">
+            <input type="password" ng-model="vm.dados.senha" required>
+        </label>
+        <button class="button button-block button-light button-outline cor" type="submit" ng-disabled="!form.$valid" ng-click="vm.cadastrar()">
+            Criar
+        </button>
+        <button class="button button-block button-light button-outline cor" href="#/login">          
+            Cancelar
+        </button>
+    </form>
+</ion-content>

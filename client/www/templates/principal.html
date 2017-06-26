@@ -4,46 +4,24 @@
         <h4>Leilões em destaque:</h4>    
 
         <div class="list">
-	        <a class="item item-thumbnail-left" href="#">
-      	    <img src="img/iphone.png">
-      	    <h2>iPhone 5S - 120 un.</h2>
-      	    <p>L.I: R$300,00  M.L: R$470,00</p>
-    	    </a>
+	         <a class="item item-thumbnail-left" href="#"  ng-repeat="item in vm.dados">
+           <img ng-src="{{item.lote.imagem}}">
+           <h2>{{item.nome}}</h2>
+           <p>L.I: {{item.lote.valorMinimo}}  M.L: {{item.lance.valor}}</p>
+           </a>
           <br>
-          <a class="item item-thumbnail-left" href="#">
-            <img src="img/camera.png">
-            <h2>Câmeras - 30 un. com NF</h2>
-            <p>L.I: R$100,00  M.L: R$590,00</p>
-         </a>
-         <br>
-         <a class="item item-thumbnail-left" href="#">
-            <img src="img/iphone.png">
-            <h2>iPhone 5S - 120 un.</h2>
-            <p>L.I: R$300,00  M.L: R$470,00</p>
-          </a>
        </div>
        <div class="text-right"><a class="test" href="#/app/destaque">Ver todos</a></div>
 
        <h4>Leilões que acompanho:</h4>    
 
        <div class="list">
-	      <a class="item item-thumbnail-left" href="#">
-          <img src="img/iphone.png">
-      	    <h2>iPhone 5S - 120 un.</h2>
-      	    <p>L.I: R$300,00  M.L: R$470,00</p>
-    	  </a>
-        <br>
-        <a class="item item-thumbnail-left" href="#">
-          <img src="img/camera.png">
-          <h2>Câmeras - 30 un. com NF</h2>
-          <p>L.I: R$100,00  M.L: R$590,00</p>
+	       <a class="item item-thumbnail-left" href="#"  ng-repeat="item in vm.dados">
+           <img ng-src="{{item.lote.imagem}}">
+           <h2>{{item.nome}}</h2>
+           <p>L.I: {{item.lote.valorMinimo}}  M.L: {{item.lance.valor}}</p>
         </a>
         <br>
-        <a class="item item-thumbnail-left" href="#">
-          <img src="img/iphone.png">
-          <h2>iPhone 5S - 120 un.</h2>
-          <p>L.I: R$300,00  M.L: R$470,00</p>
-        </a>
         </div>
         <div class="text-right"><a class="test" href="#/app/acompanha">Ver todos</a></div>
       </div>
@@ -52,46 +30,24 @@
         <h4>Leilões em andamento:</h4>    
 
         <div class="list">
-          <a class="item item-thumbnail-left" href="#">
-            <img src="img/iphone.png">
-            <h2>iPhone 5S - 120 un.</h2>
-            <p>L.I: R$300,00  M.L: R$470,00</p>
-          </a>
-          <br>
-          <a class="item item-thumbnail-left" href="#">
-            <img src="img/camera.png">
-            <h2>Câmeras - 30 un. com NF</h2>
-            <p>L.I: R$100,00  M.L: R$590,00</p>
-         </a>
-         <br>
-         <a class="item item-thumbnail-left" href="#">
-            <img src="img/iphone.png">
-            <h2>iPhone 5S - 120 un.</h2>
-            <p>L.I: R$300,00  M.L: R$470,00</p>
-          </a>
+           <a class="item item-thumbnail-left" href="#"  ng-repeat="item in vm.dados">
+           <img ng-src="{{item.lote.imagem}}">
+           <h2>{{item.nome}}</h2>
+           <p>L.I: {{item.lote.valorMinimo}}  M.L: {{item.lance.valor}}</p>
+           </a>
+           <br>
        </div>
        <div class="text-right"><a class="test" href="#/app/andamento">Ver todos</a></div>
 
        <h4>Solicitações de leilão:</h4>    
 
        <div class="list">
-        <a class="item item-thumbnail-left" href="#">
-          <img src="img/iphone.png">
-            <h2>iPhone 5S - 120 un.</h2>
-            <p>L.I: R$300,00  M.L: R$470,00</p>
+         <a class="item item-thumbnail-left" href="#"  ng-repeat="item in vm.dados">
+           <img ng-src="{{item.lote.imagem}}">
+           <h2>{{item.nome}}</h2>
+           <p>L.I: {{item.lote.valorMinimo}}  M.L: {{item.lance.valor}}</p>
         </a>
         <br>
-        <a class="item item-thumbnail-left" href="#">
-          <img src="img/camera.png">
-          <h2>Câmeras - 30 un. com NF</h2>
-          <p>L.I: R$100,00  M.L: R$590,00</p>
-        </a>
-        <br>
-        <a class="item item-thumbnail-left" href="#">
-          <img src="img/iphone.png">
-          <h2>iPhone 5S - 120 un.</h2>
-          <p>L.I: R$300,00  M.L: R$470,00</p>
-        </a>
         </div>
         <div class="text-right"><a class="test" href="#/app/solicitacoes_leilo">Ver todos</a></div>
       </div>

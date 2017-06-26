@@ -2,10 +2,10 @@
    <ion-content class="padding padrao">
       <h4>Leilões em destaque</h4>    
       <div class="list">
-        <a class="item item-thumbnail-left" href="#">
-           <img src="img/camera.png">
-           <h2>Câmeras - 30 un. com NF</h2>
-           <p>L.I: R$100,00  M.L: R$590,00</p>
+        <a class="item item-thumbnail-left" href="#"  ng-repeat="item in vm.dados">
+           <img ng-src="{{item.lote.imagem}}">
+           <h2>{{item.nome}}</h2>
+           <p>L.I: {{item.lote.valorMinimo}}  M.L: {{item.lance.valor}}</p>
         </a>
         <br>
       </div>

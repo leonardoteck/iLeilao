@@ -86,6 +86,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
+
+    .state('app.cadastro', {
+        url: '/cadastro',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/cadastro.html',
+            }
+        }
+    })
     .state('app.principal', {
         url: '/principal',
         cache: false,
