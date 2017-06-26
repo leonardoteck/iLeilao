@@ -3,9 +3,9 @@
       <h4>Leilões em destaque</h4>    
       <div class="list">
         <a class="item item-thumbnail-left" href="#"  ng-repeat="item in vm.dados">
-           <img ng-src="{{item.lote.imagem}}">
+           <img ng-src="{{item.lote.imagem}}" style="height: 100px; width: auto; display: flex; align-items: center; justify-content: center;">
            <h2>{{item.nome}}</h2>
-           <p>L.I: {{item.lote.valorMinimo}}  M.L: {{item.lance.valor}}</p>
+           <p>L.I: {{item.lote.valorMinimo | currency: 'R$ '}}  M.L: {{item.lance.valor | currency: 'R$ '}}</p>
         </a>
         <br>
       </div>

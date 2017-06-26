@@ -6,7 +6,7 @@
 	       <a class="item item-thumbnail-left" href="#"  ng-repeat="item in vm.dados">
            <img ng-src="{{item.lote.imagem}}">
            <h2>{{item.nome}}</h2>
-           <p>L.I: {{item.lote.valorMinimo}}  M.L: {{item.lance.valor}}</p>
+           <p>L.I: {{item.lote.valorMinimo | currency: 'R$ '}}  M.L: {{item.lance.valor | currency: 'R$ '}}</p>
         </a>
         <br>
       </div>
