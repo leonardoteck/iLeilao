@@ -33,11 +33,12 @@
                 auth.data = data;
                 auth.done = true;
                 auth.token = data.tokenUsuario.tokenUsuario;
-                auth.id = '1ff83f28-8d42-4fb0-a976-c13344d70917';
-                $rootScope.participante = true;
-                auth.participante = true;
-                // auth.id = data.id;
-                // $rootScope.participante = data.tipo == 0;
+                // auth.id = '1ff83f28-8d42-4fb0-a976-c13344d70917';
+                // $rootScope.participante = true;
+                // auth.participante = true;
+                auth.id = data.usuario.id;
+                auth.participante = data.usuario.tipo == 0;
+                $rootScope.participante = auth.participante;
                 cb(true);
             }).error(function (data) {
                 auth.done = false;
