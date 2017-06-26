@@ -15,7 +15,6 @@ vm.dados.lote.produtos.descricao : string
 vm.dados.lote.produtos.quantidade : number
 vm.dados.lote.produtos.imagem : imagem
 
-
 Listas de Solicitações
 ==============
 vm.dados : array
@@ -30,3 +29,19 @@ vm.dados.nome : string
 vm.dados.lote.imagem : imagem
 vm.dados.lote.valorMinimo : number
 vm.dados.lance.valor : number // maior lance
+
+Visualiza leilão
+==============
+vm.dados : object
+vm.dados.nome : string
+vm.dados.dataFinal : date
+vm.dados.lote.valorMinimo : number
+vm.dados.maiorLance.valor : number
+vm.dados.maiorLance.usuario.nome : string
+vm.dados.lote.usuario.nome : string
+vm.dados.lote.produtos : array
+vm.dados.lote.produtos.nome : string
+vm.dados.lote.produtos.imagem : imagem
+vm.dados.lote.produtos.descricao : string
+vm.dados.lote.produtos.quantidade : number
+vm.dados.dados.incrementoMinimo : number

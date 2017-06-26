@@ -53,8 +53,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
-    .state('app.solicitacoes_leilo', {
-        url: '/solicitacoes_leilo',
+    .state('app.solicitacoes_part_param', {
+        url: '/solicitacoes_part/:id',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/solicitacoes_part.html',
+                controller: 'solicitacaoController',
+                controllerAs: 'vm'
+            }
+        }
+    })
+    .state('app.solicitacoes_leilo_param', {
+        url: '/solicitacoes_leilo/:id',
         cache: false,
         views: {
             'menuContent': {
@@ -86,12 +97,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
-    .state('app.visualizar', {
-        url: '/visualizar',
+    .state('app.visualizar_param', {
+        url: '/visualizar/:id',
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'templates/visualizar.html'
+                templateUrl: 'templates/visualizar.html',
+                controller: 'leilaoController',
+                controllerAs: 'vm'
             }
         }
     })

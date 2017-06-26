@@ -40,7 +40,7 @@
                     title: 'Olá!',
                     template: 'Seja bem-vindo ao iLeilão!'
                 });
-                $state.go('app.');
+                $state.go('app.principal');
             }).error(function (data) {
                 console.log(data);
                 $ionicPopup.alert({
