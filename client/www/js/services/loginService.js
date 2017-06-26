@@ -51,7 +51,22 @@
         }
 
         function recover(email) {
-            
+            $http({
+                method: 'POST',
+                url: api.url() + 'logins/recuperar',
+                data: email
+            }).success(function (data) {
+                $ionicPopup.alert({
+                    title: 'Falta pouco!',
+                    template: 'Enviamos um e-mail com um link e instruções para que você possa recuperar a sua conta ;)'
+                });
+            }).error(function (data) {
+                console.log(data);
+                $ionicPopup.alert({
+                    title: 'Ops!',
+                    template: data[0].errorMessage
+                });
+            });
         }
     }
 })();

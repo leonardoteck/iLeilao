@@ -38,7 +38,6 @@
             if (!api.on()) {
                 vm.dados = {
                     "nome": "Moto G2 - Caiu do caminhão",
-                    "tempoLimiteLance": "03:00:25",
                     "diasDuracao": 20,
                     "incrementoMinimo": 30,
                     "status": 0,
@@ -82,31 +81,12 @@
         function formataDados(data) {
             if (data.lote.produtos.length == 0)
                 data.lote.produtos.push({});
-
-            var tempo = data.tempoLimiteLance.split(':');
-            var tempo2 = tempo[0].split('.');
-            if (tempo2.length == 2) {
-                data.tempoLimiteDias = tempo2[0];
-                data.tempoLimiteHoras = tempo2[1];
-            } else
-                data.tempoLimiteHoras = tempo[0];
-            data.tempoLimiteMinutos = tempo[1];
-            data.tempoLimiteSegundos = tempo[2];
         }
 
         function salvarDados() {
             var dados = JSON.parse(JSON.stringify(vm.dados));
 
             // Formatando alguns dados para a API entender
-                dados.tempoLimiteLance = vm.dados.tempoLimiteDias || 0 + '.' +
-                    vm.dados.tempoLimiteHoras + ':' +
-                    vm.dados.tempoLimiteMinutos + ':' +
-                    vm.dados.tempoLimiteSegundos;
-                delete dados.tempoLimiteDias;
-                delete dados.tempoLimiteHoras;
-                delete dados.tempoLimiteMinutos;
-                delete dados.tempoLimiteSegundos;
-
                 dados.UsuarioId = auth.id;
                 dados.status = 0
 
