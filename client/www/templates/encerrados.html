@@ -3,10 +3,10 @@
       <h4>Leilões encerrados</h4>    
 
       <div class="list">
-	       <a class="item item-thumbnail-left" href="#"  ng-repeat="item in vm.dados">
-           <img ng-src="{{item.lote.imagem}}">
-           <h2>{{item.nome}}</h2>
-           <p>L.I: {{item.lote.valorMinimo | currency: 'R$ '}}  M.L: {{item.lance.valor | currency: 'R$ '}}</p>
+	       <a class="item item-thumbnail-left" ng-repeat="item in vm.dados">
+           <img ng-src="{{item.imagem}}">
+           <h2>{{item.titulo}}</h2>
+           <p>Lance inicial: {{item.valorMinimo | currency: 'R$ '}}  <br><span ng-show="item.maiorLance">Maior lance: {{item.maiorLance.valor | currency: 'R$ '}}</span></p>
         </a>
         <br>
       </div>

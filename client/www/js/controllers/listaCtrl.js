@@ -11,6 +11,10 @@
 
         vm.dados = {};
 
+        vm.vaiFilhao = function (rota, id) {
+            $state.go(rota, { id: id })
+        };
+
         activate();
 
         ////////////////
@@ -40,6 +44,9 @@
                     break;
                 case 'app.destaque':
                     url = 'leiloes/populares'
+                    break;
+                case 'app.encerrados':
+                    url = 'leiloes/encerrados'
                     break;
                 default:
                     url = 'solicitacoes'

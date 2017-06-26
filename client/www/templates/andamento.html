@@ -3,10 +3,10 @@
       <h4>Leilões em andamento</h4>    
 
       <div class="list">
-	       <a class="item item-thumbnail-left" href="#"  ng-repeat="item in vm.dados">
+	       <a class="item item-thumbnail-left" ng-click="vm.vaiFilhao('app.visualizar_param', item.id)" ng-repeat="item in vm.dados">
            <img ng-src="{{item.imagem}}">
            <h2>{{item.titulo}}</h2>
-           <p>L.I: {{item.valorMinimo | currency: 'R$ '}}  M.L: {{item.maiorLance.valor | currency: 'R$ '}}</p>
+           <p>Lance inicial: {{item.valorMinimo | currency: 'R$ '}}  <br><span ng-show="item.maiorLance">Maior lance: {{item.maiorLance.valor | currency: 'R$ '}}</span></p>
         </a>
         <br>
       </div>

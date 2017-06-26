@@ -5,8 +5,8 @@
         .module('starter.controllers')
         .controller('leilaoController', leilaoController);
 
-    leilaoController.$inject = ['$scope', '$http', 'api', 'auth', '$ionicPopup', '$state', '$interval'];
-    function leilaoController($scope, $http, api, auth, $ionicPopup, $state, $interval) {
+    leilaoController.$inject = ['$scope', '$http', 'api', 'auth', '$ionicPopup', '$state', '$interval', '$rootScope'];
+    function leilaoController($scope, $http, api, auth, $ionicPopup, $state, $interval, $rootScope) {
         var vm = this;
 
         vm.dados = {};
@@ -151,29 +151,36 @@
                 vm.dados = data;
                 vm.dados.dataFinal = new Date(vm.dados.dataFinal);
 
-                $interval(function () {
-                    $http({
-                        method: 'GET',
-                        url: api.url() + 'leiloes/' + $state.params.id,
-                        headers: { 'Authorization': 'Bearer ' + auth.token }
-                    }).success(function (data) {
-                        if (!vm.dados.maiorLance && !data.maiorLance)
-                            return;
-                        if (!vm.dados.maiorLance && data.maiorLance) {
-                            vm.dados.maiorLance = data.maiorLance;
-                            return;
-                        }
-                        if (data.maiorLance.id != vm.dados.maiorLance.id)
-                            vm.dados.maiorLance = data.maiorLance;
-                        if (data.status != 0) {
-                            $ionicPopup.alert({ title: 'Vendido!', template: 'Desculpe, mas o leilão foi encerrado.' });
-                            history.back();
-                        }
-                    }).error(function (data) {
-                        console.log(data);
-                        $ionicPopup.alert({ title: 'Ops!', template: data[0].errorMessage });
-                    });
-                }, 30000);
+                // var canceled = false;
+                // var cancel = $interval(function () {
+                //     $http({
+                //         method: 'GET',
+                //         url: api.url() + 'leiloes/' + $state.params.id,
+                //         headers: { 'Authorization': 'Bearer ' + auth.token }
+                //     }).success(function (data) {
+                //         if (!vm.dados.maiorLance && !data.maiorLance)
+                //             return;
+                //         if (!vm.dados.maiorLance && data.maiorLance) {
+                //             vm.dados.maiorLance = data.maiorLance;
+                //             return;
+                //         }
+                //         if (data.maiorLance.id != vm.dados.maiorLance.id)
+                //             vm.dados.maiorLance = data.maiorLance;
+                //         if (data.status != 0) {
+                //             $ionicPopup.alert({ title: 'Vendido!', template: 'Desculpe, mas o leilão foi encerrado.' });
+                //             history.back();
+                //         }
+                //     }).error(function (data) {
+                //         console.log(data);
+                //         $ionicPopup.alert({ title: 'Ops!', template: data[0].errorMessage });
+                //     });
+                // }, 30000);
+
+                // $rootScope.$on('$stateChangeStart', 
+                // function(event, toState, toParams, fromState, fromParams, options){ 
+                //     if (!canceled)
+                //         calcel();
+                // })
 
             }).error(function (data) {
                 console.log(data);
@@ -207,6 +214,7 @@
         function encerrar() {
             $http({
                 method: 'POST',
+                data: {},
                 url: api.url() + 'leiloes/encerrar/' + $state.params.id,
                 headers: { 'Authorization': 'Bearer ' + auth.token }
             }).success(function (data) {

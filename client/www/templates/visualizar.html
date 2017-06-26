@@ -1,37 +1,36 @@
 <ion-view view-title="iLeilão" >
 
    <ion-content class="padding padrao">
-       <h4 align="center">Visualizar solicitação</h4>    
-       <br>
+       <h4 align="center">Visualizar leilão</h4>    
        <form name="solicitacao">
-           <h4>iPhone 7</h4>
+           <h4>{{vm.dados.nome}}</h4>
            
            <div class="row">
                 <div class="col bord col-center col-33">
-                    <img class="centro tama" src="img/iphone.png">
+                    <img class="centro tama" ng-src="{{vm.dados.lote.imagem}}">
                 </div>
                 <div class="col">
-                    <div class="row">
-                        <div class="col">M.L.: R$470,00</div>
+                    <div class="row" ng-show="vm.dados.maiorLance">
+                        <div class="col">Maior lance: {{vm.dados.maiorLance.valor | currency : 'R$ '}}</div>
                     </div>
                     <div class="row">
                         <div class="col">  
-                            Termino em: 10/07 15h30
+                            Término em: {{vm.dados.dataFinal.toLocaleString()}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col" ng-show="!participante">  
-                            Inc.: R$10,00
+                            Incremento mínimo: {{vm.dados.incrementoMinimo | currency: 'R$ '}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">  
-                            L.I.: R$300,00
+                            Lance inicial: {{vm.dados.lote.valorMinimo | currency: 'R$ '}}
                         </div>
                     </div>
                      <div class="row">
                         <div class="col">  
-                            <button type="submit" class="button icon-left ion-android-cart cor button-small button-block" ng-show="participante">Lance +10
+                            <button type="submit" class="button icon-left ion-android-cart cor button-small button-block" ng-show="participante" ng-click="vm.lanceMinimo()">Lance +{{vm.dados.incrementoMinimo}}
                             </button>
                         </div>
                     </div>
@@ -39,38 +38,40 @@
             </div>
             <h5 ng-show="participante">Inserir valor do lance: </h5>
             <div class="row" ng-show="participante">
-                <div class="col">  
-                    <label type="submit" class="item item-input item-select" >Lance +10</label>
+                <div class="col">
+                    <label class="item item-input">
+                        <input type="text" placeholder="Valor do lance" ng-model="lance">
+                    </label>
                 </div>
                 <div class="col">  
-                     <button type="submit" class="button cor button-small">Lance!</button>
+                     <button class="button cor button-small" ng-click="vm.lance(lance)">Lance!</button>
                 </div>
             </div>
             <div class="row" ng-show="!participante">
                 <div class="col" >  
-                    <button type="submit" class="button icon-left ion-android-hand cor button-block">Encerrar</button>
+                    <button type="submit" class="button icon-left ion-android-hand cor button-block" ng-click="vm.encerrar()">Encerrar</button>
                 </div>
             </div>
             <br>
-            <span>Vendedor: Michael</span>
-            <span style="float: right;" ng-show="!participante">M.L. por: Dougras</span>
+            <span>Vendedor: {{vm.dados.lote.vendedor.nome}}</span>
+            <span style="float: right;" ng-show="!participante && vm.dados.maiorLance">M.L. por: {{vm.dados.maiorLance.usuario.nome}}</span>
             <h4>Produtos:</h4>
-            <div class="row">
+            <div class="row" ng-repeat="produto in vm.dados.lote.produtos">
                 <div class="col bord col-center col-25">
-                    <img class="tam centro" disabled src="img/iphone.png">
+                    <img class="tam centro" ng-src="{{produto.imagem}}">
                 </div>
                 <div class="col">
                     <div class="row">
                         <div class="col">  
-                            iPhone 7
+                            {{produto.nome}}
                         </div>
                         <div class="col">  
-                            Qtd.: 120 un.
+                            Qtd.: {{produto.quantidade}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">  
-                            Novo na caixa, importado, sem NF
+                            {{produto.descricao}}
                         </div>
                     </div>
                 </div>

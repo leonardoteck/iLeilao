@@ -1,69 +1,63 @@
-<ion-view view-title="iLeilão" >
+<ion-view view-title="iLeilão">
 
-   <ion-content class="padding padrao">
-       <h4 align="center">Visualizar solicitação</h4>    
-       <br>
-       <form name="solicitacao">
-           <h4>iPhone 7</h4>
-           
-           <div class="row">
+    <ion-content class="padding padrao">
+        <h4 align="center">Visualizar solicitação</h4>
+        <form name="solicitacao">
+            <h4>{{vm.dados.nome}}</h4>
+
+            <div class="row">
                 <div class="col bord col-center col-33">
-                    <img class="centro tama" src="img/iphone.png">
+                    <img class="centro tama" ng-src="{{vm.dados.lote.imagem}}">
                 </div>
                 <div class="col">
                     <div class="row">
-                        <div class="col">M.L.: R$470,00</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">  
-                            Comprador: Dougras
+                        <div class="col">
+                            Vendedor: {{vm.dados.lote.vendedor.nome}}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">  
-                            Inc.: R$10,00
+                        <div class="col">
+                            Incremento mínimo: {{vm.dados.incrementoMinimo | currency: 'R$ '}}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">  
-                            L.I.: R$300,00
+                        <div class="col">
+                            Lance inicial: {{vm.dados.lote.valorMinimo | currency: 'R$ '}}
                         </div>
                     </div>
                 </div>
             </div>
 
             <h4>Produtos:</h4>
-            <div class="row">
+            <div class="row" ng-repeat="produto in vm.dados.lote.produtos">
                 <div class="col bord col-center col-25">
-                    <img class="tam centro" disabled src="img/iphone.png">
+                    <img class="tam centro" disabled ng-src="{{produto.imagem}}">
                 </div>
                 <div class="col">
                     <div class="row">
-                        <div class="col">  
-                            iPhone 7
+                        <div class="col">
+                            {{produto.nome}}
                         </div>
-                        <div class="col">  
-                            Qtd.: 120 un.
+                        <div class="col">
+                            {{produto.quantidade}}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">  
-                            Novo na caixa, importado, sem NF
+                        <div class="col">
+                            {{produto.descricao}}
                         </div>
                     </div>
                 </div>
             </div>
             <br>
-           <div class="row">
-               <div class="col">
-                   <button type="submit" class="button icon-left ion-android-close cor button-block" ng-click="vm.recusar()">Recusar</button>
-               </div>
-               <div class="col">
-                   <button type="submit" class="button icon-left ion-checkmark cor button-block" ng-click="vm.aceitar()">Iniciar Leilão</button>
-               </div>
-
-
-           
-       </form>
-  </ion-content>
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="button icon-left ion-android-close cor button-block" ng-click="vm.recusar()">Recusar</button>
+                </div>
+                <div class="col">
+                    <button type="submit" class="button icon-left ion-checkmark cor button-block" ng-click="vm.aceitar()">Iniciar Leilão</button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
 </ion-view>

@@ -2,10 +2,10 @@
    <ion-content class="padding padrao">
       <h4>Leilões em destaque</h4>    
       <div class="list">
-        <a class="item item-thumbnail-left" href="#"  ng-repeat="item in vm.dados">
-           <img ng-src="{{item.lote.imagem}}" style="height: 100px; width: auto; display: flex; align-items: center; justify-content: center;">
-           <h2>{{item.nome}}</h2>
-           <p>L.I: {{item.lote.valorMinimo | currency: 'R$ '}}  M.L: {{item.lance.valor | currency: 'R$ '}}</p>
+        <a class="item item-thumbnail-left" ng-click="vm.vaiFilhao('app.visualizar_param', item.id)" ng-repeat="item in vm.dados">
+           <img ng-src="{{item.imagem}}">
+           <h2>{{item.titulo}}</h2>
+           <p>Lance inicial: {{item.valorMinimo | currency: 'R$ '}}  <br><span ng-show="item.maiorLance">Maior lance: {{item.maiorLance.valor | currency: 'R$ '}}</span></p>
         </a>
         <br>
       </div>

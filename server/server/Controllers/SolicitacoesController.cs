@@ -25,7 +25,7 @@ namespace server.Controllers
         }
 
         // GET: api/Solicitacoes
-        //Retorna todas as solicitações
+        //Retorna todas as solicitaï¿½ï¿½es
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -43,7 +43,7 @@ namespace server.Controllers
             }
         }
 
-        //Pega todas as solicitações do usuário
+        //Pega todas as solicitaï¿½ï¿½es do usuï¿½rio
         // GET: api/Solicitacoes/usuario/usuarioId
         [HttpGet("usuario/{usuarioId}")]
         public IActionResult GetUsuario([FromRoute] string usuarioId)
@@ -53,6 +53,7 @@ namespace server.Controllers
                 var solicitacoes = context.Solicitacao
                     .Include(s => s.Lote)
                     .Include(s => s.Lote.Produtos)
+                    .Include(s => s.Usuario)
                     .Where(s => s.UsuarioId.Equals(usuarioId));
                 return Ok(solicitacoes);
             }
@@ -62,7 +63,7 @@ namespace server.Controllers
             }
         }
 
-        //Pega todas solicitações pendentes
+        //Pega todas solicitaï¿½ï¿½es pendentes
         // GET: api/pendentes
         [HttpGet("pendentes")]
         public IActionResult GetPendentes()
@@ -81,7 +82,7 @@ namespace server.Controllers
             }
         }
 
-        //Pega uma solicitação específica
+        //Pega uma solicitaï¿½ï¿½o especï¿½fica
         // GET: api/Solicitacoes/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
@@ -99,7 +100,7 @@ namespace server.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Solicitação", "Solicitação não encontrada.");
+                    ModelState.AddModelError("Solicitaï¿½ï¿½o", "Solicitaï¿½ï¿½o nï¿½o encontrada.");
                     return NotFound(ModelState.Values.SelectMany(e => e.Errors));
                 }
             }
@@ -128,7 +129,7 @@ namespace server.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Solicitação", "Solicitação não encontrada.");
+                    ModelState.AddModelError("Solicitaï¿½ï¿½o", "Solicitaï¿½ï¿½o nï¿½o encontrada.");
                     return NotFound(ModelState.Values.SelectMany(e => e.Errors));
                 }
             }
@@ -155,7 +156,7 @@ namespace server.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Usuario", "Usuário não cadastrado no sistema.");
+                    ModelState.AddModelError("Usuario", "Usuï¿½rio nï¿½o cadastrado no sistema.");
                     return NotFound(ModelState.Values.SelectMany(e => e.Errors));
                 }
             }
@@ -178,17 +179,17 @@ namespace server.Controllers
 
                 if (solicitacao != null)
                 {
-                    //Nem Lote nem Produto dependem de Solicitação, então se deletar a solicitação, 
-                    //produtos e lote se mantém
-                    //mas ao apagar o lote (que é relação tanto de solicitação, quanto de produto, 
-                    //a solicitação e os produtos tbm são apagados
+                    //Nem Lote nem Produto dependem de Solicitaï¿½ï¿½o, entï¿½o se deletar a solicitaï¿½ï¿½o, 
+                    //produtos e lote se mantï¿½m
+                    //mas ao apagar o lote (que ï¿½ relaï¿½ï¿½o tanto de solicitaï¿½ï¿½o, quanto de produto, 
+                    //a solicitaï¿½ï¿½o e os produtos tbm sï¿½o apagados
                     context.Lote.Remove(solicitacao.Lote);
                     await context.SaveChangesAsync();
                     return Ok();
                 }
                 else
                 {
-                    ModelState.AddModelError("Solicitação", "Solicitação não existe no sistema.");
+                    ModelState.AddModelError("Solicitaï¿½ï¿½o", "Solicitaï¿½ï¿½o nï¿½o existe no sistema.");
                     return NotFound(ModelState.Values.SelectMany(e => e.Errors));
                 }
             }
@@ -223,7 +224,7 @@ namespace server.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Solicitação", "Solicitação não encontrada para aprovação.");
+                    ModelState.AddModelError("Solicitaï¿½ï¿½o", "Solicitaï¿½ï¿½o nï¿½o encontrada para aprovaï¿½ï¿½o.");
                     return NotFound(ModelState.Values.SelectMany(e => e.Errors));
                 }
             }
@@ -255,7 +256,7 @@ namespace server.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Solicitação", "Solicitação não existe no sistema.");
+                    ModelState.AddModelError("Solicitaï¿½ï¿½o", "Solicitaï¿½ï¿½o nï¿½o existe no sistema.");
                     return NotFound(ModelState.Values.SelectMany(e => e.Errors));
                 }
             }

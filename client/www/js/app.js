@@ -87,14 +87,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
     })
 
-    .state('app.cadastro', {
+    .state('cadastro', {
         url: '/cadastro',
         cache: false,
-        views: {
-            'menuContent': {
+        // views: {
+        //     'menuContent': {
                 templateUrl: 'templates/cadastro.html',
-            }
-        }
+                controller: 'cadastroController',
+                controllerAs: 'vm'
+            // }
+        // }
     })
     .state('app.principal', {
         url: '/principal',
@@ -123,7 +125,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'templates/encerrados.html'
+                templateUrl: 'templates/encerrados.html',
+                controller: 'listaController',
+                controllerAs: 'vm'
             }
         }
     })

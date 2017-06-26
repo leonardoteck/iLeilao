@@ -12,19 +12,12 @@
             <input type="text" ng-model="vm.dados.email" required>
         </label>
         <h4>Tipo de usuário</h4>
-        <label class="item item-input item-select" ng-model="vm.dados.tipo">
+        <label class="item item-input item-select">
             <div class="input-label">
                 Usuário
             </div>
-            <select>
-                <option>Leiloeiro</option>
-                <option selected>Participante</option>
+            <select ng-model="vm.dados.tipo" ng-init="vm.dados.tipo = vm.tipos[0].id" ng-options="tipo.id as tipo.nome for tipo in vm.tipos">
             </select>
-        </label>
-
-        <h4>E-mail</h4>
-        <label class="item item-input">
-            <input type="text" ng-model="vm.Dados.email" required>
         </label>
         <h4>Senha</h4>
         <label class="item item-input">

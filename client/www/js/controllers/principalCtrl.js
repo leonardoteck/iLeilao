@@ -11,6 +11,10 @@
 
         vm.dados = {};
 
+        vm.vaiFilhao = function (rota, id) {
+            $state.go(rota, { id: id })
+        };
+
         activate();
 
         ////////////////
@@ -135,7 +139,7 @@
                 }).error(error);
                 $http({
                     method: 'GET',
-                    url: api.url() + 'leiloes/usuario/' + auth.id,
+                    url: api.url() + 'leiloes/usuario/participando/' + auth.id,
                     headers: { 'Authorization': 'Bearer ' + auth.token }
                 }).success(function (data) {
                     vm.dados.usuario = data;

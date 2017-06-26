@@ -10,6 +10,16 @@
         var vm = this;
 
         vm.dados = {};
+        vm.tipos = [
+            {
+                id: 0,
+                nome: 'Participante'
+            },
+            {
+                id: 1,
+                nome: 'Leiloeiro'
+            }
+        ]
         
         vm.cadastrar = cadastrar;
 
@@ -34,13 +44,11 @@
                 url: api.url() + 'usuarios/',
                 data: vm.dados
             }).success(function (data) {
-                auth.done = true;
-                auth.data = data;
                 $ionicPopup.alert({
                     title: 'Olá!',
                     template: 'Seja bem-vindo ao iLeilão!'
                 });
-                $state.go('app.principal');
+                $state.go('login');
             }).error(function (data) {
                 console.log(data);
                 $ionicPopup.alert({
