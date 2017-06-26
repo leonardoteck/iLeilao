@@ -7519,7 +7519,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+SolicitacoesContext(ctx: LeilaoContext)",
+											"text": "+SolicitacoesController(ctx: LeilaoContext)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27907,7 +27907,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFcT/odYnzcCMU="
 							},
-							"name": "SolicitacoesContext",
+							"name": "SolicitacoesController",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
