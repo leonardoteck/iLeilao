@@ -84,8 +84,10 @@ $dark:                            #444 !default;
   border: none !important; }
 
 .tama {
-  height: 100px;
-  width: auto; }
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%; }
 
 .centro {
   display: block;

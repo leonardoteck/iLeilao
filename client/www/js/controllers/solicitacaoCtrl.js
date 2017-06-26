@@ -84,23 +84,23 @@
         }
 
         function salvarDados() {
-            var dados = JSON.parse(JSON.stringify(vm.dados));
+            //var dados = JSON.parse(JSON.stringify(vm.dados));
 
             // Formatando alguns dados para a API entender
-                dados.UsuarioId = auth.id;
-                dados.status = 0
+                vm.dados.UsuarioId = auth.id;
+                vm.dados.status = 0
 
-                for (var i = 0; i < dados.lote.produtos.length; i++) {
-                    delete dados.lote.produtos[i].imagem;
-                    if (!dados.lote.produtos[i].nome) {
-                        dados.lote.produtos.splice(i, 1);
+                for (var i = 0; i < vm.dados.lote.produtos.length; i++) {
+                   // delete vm.dados.lote.produtos[i].imagem;
+                    if (!vm.dados.lote.produtos[i].nome) {
+                        vm.dados.lote.produtos.splice(i, 1);
                         i--;
                     }
                 }
 
             var request = {
                 method: 'POST',
-                data: dados,
+                data: vm.dados,
                 url: api.url() + 'Solicitacoes',
                 headers: { 'Authorization': 'Bearer ' + auth.token }
             };
@@ -147,7 +147,7 @@
             })
             .success(function (data) {
                 console.log(data);
-                $ionicPopup.alert({ title: 'Sucesso!', template: 'Solicitação aprovada com sucesso.' });
+                $ionicPopup.alert({ title: 'Sucesso!', template: 'Solicitação recusada com sucesso.' });
             })
             .error(function (data) {
                 console.log(data);

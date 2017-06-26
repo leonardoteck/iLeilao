@@ -189,7 +189,11 @@
         }
 
         function lanceMinimo() {
-            lance(vm.dados.maiorLance.valor + vm.dados.lote.valorMinimo);
+
+            if (vm.dados.maiorLance)
+                lance(vm.dados.maiorLance.valor + vm.dados.lote.valorMinimo);
+            else
+                lance(vm.dados.lote.valorMinimo + vm.dados.lote.valorMinimo);
         }
 
         function lance(valor) {

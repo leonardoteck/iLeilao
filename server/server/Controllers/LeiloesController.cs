@@ -13,7 +13,7 @@ namespace server.Controllers
 {
     [Produces("application/json")]
     [Route("api/Leiloes")]
-    //[Authorize]
+    [Authorize]
     public class LeiloesController : Controller
     {
         private readonly LeilaoContext context;

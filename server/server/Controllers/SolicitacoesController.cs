@@ -14,7 +14,7 @@ namespace server.Controllers
 {
     [Produces("application/json")]
     [Route("api/Solicitacoes")]
-    //[Authorize]
+    [Authorize]
     public class SolicitacoesController : Controller
     {
         private readonly LeilaoContext context;

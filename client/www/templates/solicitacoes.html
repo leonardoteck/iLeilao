@@ -3,7 +3,7 @@
       <h4>Solicitações de leilão</h4>    
 
       <div class="list">
-	      <a class="item item-thumbnail-left" ng-click="vm.vaiFilhao('app.solicitacoes_part_param', item.id)" ng-repeat="item in vm.dados">
+	      <a class="item item-thumbnail-left" ng-click="vm.vaiFilhao(participante ? 'app.solicitacoes_part_param' : 'app.solicitacoes_leilo_param', item.id)" ng-repeat="item in vm.dados">
            <img ng-src="{{item.lote.imagem}}">
            <h2>{{item.nome}}</h2>
            <p>Lance inicial: {{item.lote.valorMinimo | currency: 'R$ ' }}</p>

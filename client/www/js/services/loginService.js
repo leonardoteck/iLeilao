@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
 'use strict';
 
     angular
@@ -55,7 +55,7 @@
             $http({
                 method: 'POST',
                 url: api.url() + 'logins/recuperar',
-                data: email,
+                data: '"' + email + '"',
                 headers: { 'Content-Type': 'application/json' }
             }).success(function (data) {
                 $ionicPopup.alert({
