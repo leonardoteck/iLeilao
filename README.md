@@ -1,0 +1,2 @@
+<strong>iLeilão</strong> - Aplicação mobile para gerenciamento de leilões.<br><br>
+Foi desenvolvido utilizando a arquitetura cliente-servidor, sendo o cliente baseado na framework Ionic e o servidor baseado na framework ASP.NET Core com banco de dados PostgreSQL. Esse projeto foi desenvolvido para a matéria de Sistemas Distribuídos, durante o 5° semestre do curso de Análise e Desenvolvimento de Sistemas, na Fatec São Caetano do Sul.
